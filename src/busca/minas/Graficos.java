@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +21,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 //import javax.swing.JPanel;
 /**
@@ -59,6 +62,7 @@ public class Graficos extends JFrame {
                 nuevoCuadro.setBackground(Color.gray);
                 nuevoCuadro.setOpaque(true);
                 nuevoCuadro.setText(" ");
+                nuevoCuadro.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1)); //EN PRUEBA
                 nuevoCuadro.setFont(new Font("Times New Roman",Font.BOLD,12));
                 nuevoCuadro.setHorizontalAlignment(SwingConstants.CENTER);
                 nuevoCuadro.setVisible(false);
@@ -103,7 +107,6 @@ public class Graficos extends JFrame {
                          trifuersa(i);
                      }
                      
-                     System.out.println(listaCuadros.get(i).getText());
                 }
 
                 @Override
@@ -148,9 +151,9 @@ public class Graficos extends JFrame {
    public void dibujarMinas(int dificultad){
        
        switch(dificultad){
-           case 1: cantidadMinas = 20;
+           case 1: cantidadMinas = 40;
            break;
-           case 2: cantidadMinas = 100;
+           case 2: cantidadMinas = 75;
            break;
            case 3: cantidadMinas = 200;
            default:
@@ -240,12 +243,43 @@ public class Graficos extends JFrame {
        int derecha;
        int izquierda;
        boolean columna1 = false;
+       boolean horizontal1 = false;
+       boolean columna2 = false;
+       boolean horizontal2 = false;
+       boolean centro = false;
+       
        
        for(int a = 0; a<21; a++){
            if(i2==a){
                columna1 = true;
+               break;
            }
        }
+       
+       for(int a=21; a<=420; a+=21){
+           if(i2==a){
+               horizontal1=true;
+               break;
+           }
+       }
+       
+       for(int a=421; a<=440; a++){
+           if(i2==a){
+               columna2=true;
+               break;
+           }
+       }
+       
+       for(int a=41; a<=419; a+=21){
+           if(i2==a){
+               horizontal2=true;
+               break;
+           }
+       }
+       
+      if(columna1!=true && columna2!=true && horizontal1!=true && horizontal2!=true){
+          centro = true;
+      }
      
        
      if(columna1==true){
@@ -260,7 +294,7 @@ public class Graficos extends JFrame {
             suma+=algoritmoCruz(abajo);
             
             listaCuadros.get(i2).setText(Integer.toString(suma));
-            //-----------------------------------------------------EN PRUEBA-------------------------------------------------------//
+           
             if(suma==0){
                 listaCuadros.get(i2).setText(null);           //Vamos a ponerle un indicador null a los labels donde ya hayamos hecho el algoritmos trifuersa
                 listaBotones.get(derecha).setVisible(false);  //en las posiciones cruz donde no hay mina apagar los botones.
@@ -275,14 +309,33 @@ public class Graficos extends JFrame {
                 trifuersa(abajo); //Realizar el procedimiento en los cuadros que regalara el algoritmo
                 }
             }
-           //------------------------------------------------------EN PRUEBA------------------------------------------------------//
+          
             
         }else if(i2==20){
             arriba = i2-1;
             derecha = i2+21;
             suma+=algoritmoCruz(arriba);
             suma+=algoritmoCruz(derecha);
-             listaCuadros.get(i2).setText(Integer.toString(suma));
+            listaCuadros.get(i2).setText(Integer.toString(suma));
+            
+            if(suma==0){
+                listaCuadros.get(i2).setText(null);
+                listaBotones.get(arriba).setVisible(false);
+                listaBotones.get(derecha).setVisible(false);
+                listaCuadros.get(arriba).setVisible(true);
+                listaCuadros.get(derecha).setVisible(true);
+                
+                if(listaCuadros.get(derecha).getText()!=null){
+                    trifuersa(derecha);
+                }
+                if(listaCuadros.get(arriba).getText()!=null){
+                    trifuersa(arriba);
+                }
+                
+                
+            }
+             
+             
         }else{
             arriba = i2-1;
             abajo = i2+1;
@@ -291,8 +344,235 @@ public class Graficos extends JFrame {
             suma+=algoritmoCruz(derecha);
             suma+=algoritmoCruz(abajo);
             suma+=algoritmoCruz(arriba);
-             listaCuadros.get(i2).setText(Integer.toString(suma));      
+             listaCuadros.get(i2).setText(Integer.toString(suma));   
+             
+             
+             if(suma==0){
+                 listaCuadros.get(i2).setText(null);
+                 listaBotones.get(arriba).setVisible(false);
+                 listaBotones.get(abajo).setVisible(false);
+                 listaBotones.get(derecha).setVisible(false);
+                 listaCuadros.get(arriba).setVisible(true);
+                 listaCuadros.get(abajo).setVisible(true);
+                 listaCuadros.get(derecha).setVisible(true);
+                 
+                 if(listaCuadros.get(arriba).getText()!=null){
+                     trifuersa(arriba);
+                 }
+                  if(listaCuadros.get(abajo).getText()!=null){
+                     trifuersa(abajo);
+                 }
+                   if(listaCuadros.get(derecha).getText()!=null){
+                     trifuersa(derecha);
+                 }
+                 
+                 
+                 
+             }
         }  
-    }
+    }//Fin de la vertical 1
+     
+     if(horizontal1==true){
+         int suma = 0;
+            
+        if(i2==420){
+            izquierda = i2-21;
+            abajo = i2+1;
+            suma+=algoritmoCruz(izquierda);
+            suma+=algoritmoCruz(abajo);
+            
+            listaCuadros.get(i2).setText(Integer.toString(suma));
+            
+            if(suma==0){
+                listaCuadros.get(i2).setText(null);
+                listaBotones.get(izquierda).setVisible(false);
+                listaBotones.get(abajo).setVisible(false);
+                listaCuadros.get(izquierda).setVisible(true);
+                listaCuadros.get(abajo).setVisible(true);
+                
+                
+                if(listaCuadros.get(izquierda).getText()!=null){
+                    trifuersa(izquierda);  
+                }
+                if(listaCuadros.get(abajo).getText()!=null){
+                    trifuersa(abajo);
+                }
+            } 
+        }else{
+            izquierda = i2-21;
+            abajo = i2+1;
+            derecha = i2+21;
+            
+            suma+=algoritmoCruz(izquierda);
+            suma+=algoritmoCruz(abajo);
+            suma+=algoritmoCruz(derecha);
+            
+            listaCuadros.get(i2).setText(Integer.toString(suma));
+            
+          if(suma==0){
+                listaCuadros.get(i2).setText(null);
+                listaBotones.get(izquierda).setVisible(false);
+                listaBotones.get(abajo).setVisible(false);
+                listaCuadros.get(izquierda).setVisible(true);
+                listaCuadros.get(abajo).setVisible(true);
+                listaBotones.get(derecha).setVisible(false);
+                listaCuadros.get(derecha).setVisible(true);
+                
+                
+                if(listaCuadros.get(izquierda).getText()!=null){
+                    trifuersa(izquierda);  
+                }
+                if(listaCuadros.get(abajo).getText()!=null){
+                    trifuersa(abajo);
+                }
+                if(listaCuadros.get(derecha).getText()!=null){
+                    trifuersa(derecha);
+                }
+            } 
+            
+        }  
+     }//Fin horizontal 1
+     
+     if(columna2==true){
+         int suma=0;
+         
+         if(i2==440){
+             izquierda = i2-21;
+             arriba = i2-1;
+             
+             suma+=algoritmoCruz(izquierda);
+             suma+=algoritmoCruz(arriba);
+             
+             listaCuadros.get(i2).setText(Integer.toString(suma));
+             
+             if(suma==0){
+                 listaCuadros.get(i2).setText(null);
+                 listaBotones.get(izquierda).setVisible(false);
+                 listaCuadros.get(izquierda).setVisible(true);
+                 listaCuadros.get(arriba).setVisible(true);
+                 listaBotones.get(arriba).setVisible(false);
+                 
+                 if(listaCuadros.get(izquierda).getText()!=null){
+                    trifuersa(izquierda);  
+                }
+                if(listaCuadros.get(arriba).getText()!=null){
+                    trifuersa(arriba);
+                }
+             } 
+         }else{
+             arriba = i2-1;
+             izquierda = i2-21;
+             abajo = i2+1;
+             
+             suma+=algoritmoCruz(izquierda);
+             suma+=algoritmoCruz(arriba);
+             suma+=algoritmoCruz(abajo);
+             
+             listaCuadros.get(i2).setText(Integer.toString(suma));
+             
+             if(suma==0){
+                 listaCuadros.get(i2).setText(null);
+                 listaBotones.get(izquierda).setVisible(false);
+                 listaCuadros.get(izquierda).setVisible(true);
+                 listaCuadros.get(arriba).setVisible(true);
+                 listaBotones.get(arriba).setVisible(false);
+                 listaCuadros.get(abajo).setVisible(true);
+                 listaBotones.get(abajo).setVisible(false);
+                 
+                if(listaCuadros.get(izquierda).getText()!=null){
+                    trifuersa(izquierda);  
+                }
+                if(listaCuadros.get(arriba).getText()!=null){
+                    trifuersa(arriba);
+                }
+                if(listaCuadros.get(abajo).getText()!=null){
+                    trifuersa(abajo);
+                }
+             }
+         }
+     }//Fin columna2
+     
+     if(horizontal2==true){
+         int suma = 0;
+         izquierda = i2-21;
+         arriba = i2-1;
+         derecha = i2+21;
+         
+         suma+=algoritmoCruz(izquierda);
+         suma+=algoritmoCruz(arriba);
+         suma+=algoritmoCruz(derecha);
+         
+         listaCuadros.get(i2).setText(Integer.toString(suma));
+         
+         if(suma==0){
+                 listaCuadros.get(i2).setText(null);
+                 listaBotones.get(izquierda).setVisible(false);
+                 listaCuadros.get(izquierda).setVisible(true);
+                 listaCuadros.get(arriba).setVisible(true);
+                 listaBotones.get(arriba).setVisible(false);
+                 listaCuadros.get(derecha).setVisible(true);
+                 listaBotones.get(derecha).setVisible(false);
+                 
+                if(listaCuadros.get(izquierda).getText()!=null){
+                    trifuersa(izquierda);  
+                }
+                if(listaCuadros.get(arriba).getText()!=null){
+                    trifuersa(arriba);
+                }
+                if(listaCuadros.get(derecha).getText()!=null){
+                    trifuersa(derecha);
+                }
+             }  
+     }//Fin de la horizontal 2
+     
+     
+     if(centro==true){
+         int suma = 0;
+         arriba = i2-1;
+         abajo = i2+1;
+         derecha = i2+21;
+         izquierda = i2-21;
+         
+         suma+=algoritmoCruz(izquierda);
+         suma+=algoritmoCruz(arriba);
+         suma+=algoritmoCruz(derecha);
+         suma+=algoritmoCruz(abajo);
+         
+         listaCuadros.get(i2).setText(Integer.toString(suma));
+         
+             if(suma==0){
+                 listaCuadros.get(i2).setText(null);
+                 listaBotones.get(izquierda).setVisible(false);
+                 listaCuadros.get(izquierda).setVisible(true);
+                 listaCuadros.get(arriba).setVisible(true);
+                 listaBotones.get(arriba).setVisible(false);
+                 listaCuadros.get(derecha).setVisible(true);
+                 listaBotones.get(derecha).setVisible(false);
+                 listaCuadros.get(abajo).setVisible(true);
+                 listaBotones.get(abajo).setVisible(false);
+                 
+                if(listaCuadros.get(izquierda).getText()!=null){
+                    trifuersa(izquierda);  
+                }
+                if(listaCuadros.get(arriba).getText()!=null){
+                    trifuersa(arriba);
+                }
+                if(listaCuadros.get(derecha).getText()!=null){
+                    trifuersa(derecha);
+                }
+                if(listaCuadros.get(abajo).getText()!=null){
+                    trifuersa(abajo);
+                }
+             }  
+         
+         
+         
+         
+         
+     }
+    
+     
+     
+     
   }
 }

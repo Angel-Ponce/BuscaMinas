@@ -17,9 +17,8 @@ public class Principal {
         juego.crearVentana();
         juego.crearCuadricula(); 
         juego.crearBotones();  
-        juego.dibujarMinas(1);
+        juego.dibujarMinas(2);
     }
-    
     
     
     
