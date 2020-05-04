@@ -40,7 +40,7 @@ public class Graficos extends JFrame {
         ventana.setSize(530,553);
         ventana.setLocationRelativeTo(null);
         ventana.setTitle("BUSCAMINAS");
-        ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
+      //ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ventana.setResizable(false); 
         ventana.setVisible(true);  
         lienzo = new JPanel();

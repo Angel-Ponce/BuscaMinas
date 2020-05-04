@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package busca.minas;
 
 /**
@@ -10,30 +6,32 @@ package busca.minas;
  * @author Angel
  */
 public class Principal {
-    private int k;
-    static Graficos juego;
+    //static Graficos juego;
+    static Menu iniciarjuego;
     
-    public Principal(int k){
-        this.k=k;
-        inicio(k);
-    }
+    
     
     public static void main(String[] args) {
-        juego = new Graficos();
-        juego.crearVentana();
-        juego.crearCuadricula(); 
-        juego.crearBotones();  
-        juego.dibujarMinas(1);
+        
+        iniciarjuego = new Menu();
+        iniciarjuego.iniciar();
+       
+       
+       // juego = new Graficos();
+       // juego.crearVentana();
+       // juego.crearCuadricula(); 
+       // juego.crearBotones();  
+       // juego.dibujarMinas(3);
     }
     
-    public void inicio(int k){
-        
-        juego = new Graficos();
-        juego.crearVentana();
-        juego.crearCuadricula(); 
-        juego.crearBotones();
-        juego.dibujarMinas(k);
-    }
+//    public void inicio(int k){
+//        
+//        juego = new Graficos();
+//        juego.crearVentana();
+//        juego.crearCuadricula(); 
+//        juego.crearBotones();
+//        juego.dibujarMinas(k);
+//    }
     }
 
     
