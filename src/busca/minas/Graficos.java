@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
-import javafx.scene.layout.Border;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +20,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
 //import javax.swing.JPanel;
 /**
@@ -48,6 +46,7 @@ public class Graficos extends JFrame {
         lienzo = new JPanel();
         lienzo.setSize(530,525);
         lienzo.setLocation(0, 0);
+        lienzo.setBackground(Color.gray);
         lienzo.setLayout(null);
         ventana.add(lienzo);
         
@@ -370,7 +369,7 @@ public class Graficos extends JFrame {
                  
              }
         }  
-    }//Fin de la vertical 1
+    }//Fin de la columna 1
      
      if(horizontal1==true){
          int suma = 0;
@@ -563,12 +562,7 @@ public class Graficos extends JFrame {
                 if(listaCuadros.get(abajo).getText()!=null){
                     trifuersa(abajo);
                 }
-             }  
-         
-         
-         
-         
-         
+             }//Fin cuadricula central
      }
     
      
