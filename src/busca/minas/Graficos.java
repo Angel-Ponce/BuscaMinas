@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
-import javafx.scene.layout.Border;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,8 +41,8 @@ public class Graficos extends JFrame {
         ventana.setSize(530,553);
         ventana.setLocationRelativeTo(null);
         ventana.setTitle("BUSCAMINAS");
-        ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        ventana.setResizable(false);
+        //ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        ventana.setResizable(false); 
         ventana.setVisible(true);  
         lienzo = new JPanel();
         lienzo.setSize(530,525);
@@ -65,7 +64,7 @@ public class Graficos extends JFrame {
                 nuevoCuadro.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1)); //EN PRUEBA
                 nuevoCuadro.setFont(new Font("Times New Roman",Font.BOLD,12));
                 nuevoCuadro.setHorizontalAlignment(SwingConstants.CENTER);
-                nuevoCuadro.setVisible(false);
+                nuevoCuadro.setVisible(false);    //Aqui tocamos
                 lienzo.add(nuevoCuadro);
                 listaCuadros.add(nuevoCuadro);
                 lienzo.repaint();
@@ -80,7 +79,7 @@ public class Graficos extends JFrame {
                 JButton nuevoBoton = new JButton();
                 nuevoBoton.setSize(25,25);
                 nuevoBoton.setLocation(x,y);
-                nuevoBoton.setVisible(true);
+                nuevoBoton.setVisible(true); 
                 nuevoBoton.setBackground(Color.darkGray);
                 lienzo.add(nuevoBoton);
                 listaBotones.add(nuevoBoton);
@@ -174,7 +173,7 @@ public class Graficos extends JFrame {
        //Se coloca y se guarda en la posicion exacta en el lienzo y en la lista de Labels
        for(int it: minas){
            
-           JLabel sustituto = new JLabel(new ImageIcon("bomba.jpg"));
+           JLabel sustituto = new JLabel(new ImageIcon("Bomba.png"));
            sustituto.setSize(25,25);
            
            int posx = listaCuadros.get(it).getLocation().x;

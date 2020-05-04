@@ -11,15 +11,50 @@ package busca.minas;
  */
 public class Principal {
     
+    
+    private int k;
     static Graficos juego;
+    
+    public Principal(int k){
+        
+        this.k=k;
+        
+        inicio(k);
+        
+    }
+    
     public static void main(String[] args) {
+        
+        //juego = new Graficos();
+        //juego.crearVentana();
+        //juego.crearCuadricula(); 
+        //juego.crearBotones();  
+        //juego.dibujarMinas(2);
+    }
+    
+    public void inicio(int k){
+        
         juego = new Graficos();
         juego.crearVentana();
         juego.crearCuadricula(); 
         juego.crearBotones();  
-        juego.dibujarMinas(2);
+        juego.dibujarMinas(k);
+        
     }
-    
+
+    /**
+     * @return the dificultad
+     */
+    public int getDificultad() {
+        return k;
+    }
+
+    /**
+     * @param dificultad the dificultad to set
+     */
+    public void setDificultad(int dificultad) {
+        this.k = dificultad;
+    }
     
     
     
