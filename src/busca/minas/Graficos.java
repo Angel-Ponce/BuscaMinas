@@ -64,7 +64,7 @@ public class Graficos extends JFrame {
                 nuevoCuadro.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1)); //EN PRUEBA
                 nuevoCuadro.setFont(new Font("Times New Roman",Font.BOLD,12));
                 nuevoCuadro.setHorizontalAlignment(SwingConstants.CENTER);
-                nuevoCuadro.setVisible(false);    //Aqui tocamos
+                nuevoCuadro.setVisible(false);   
                 lienzo.add(nuevoCuadro);
                 listaCuadros.add(nuevoCuadro);
                 lienzo.repaint();

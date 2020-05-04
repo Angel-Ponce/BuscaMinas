@@ -10,8 +10,6 @@ package busca.minas;
  * @author Angel
  */
 public class Principal {
-    
-    
     private int k;
     static Graficos juego;
     
