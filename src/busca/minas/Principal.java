@@ -11,7 +11,15 @@ package busca.minas;
  */
 public class Principal {
     
+    
+    private int k;
     static Graficos juego;
+    
+    public Principal(int k){
+        this.k=k;
+        inicio(k);
+    }
+    
     public static void main(String[] args) {
         juego = new Graficos();
         juego.crearVentana();
@@ -19,4 +27,15 @@ public class Principal {
         juego.crearBotones();  
         juego.dibujarMinas(1);
     }
-}
+    
+    public void inicio(int k){
+        
+        juego = new Graficos();
+        juego.crearVentana();
+        juego.crearCuadricula(); 
+        juego.crearBotones();
+        juego.dibujarMinas(k);
+    }
+    }
+
+    
