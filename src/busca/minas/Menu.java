@@ -66,7 +66,7 @@ public class Menu {
        comenzar.setBounds(220, 230, 120, 50);
        comenzar.setForeground(Color.black);
        comenzar.setBackground(Color.red);
-       comenzar.setFont(new Font("Stencil",Font.BOLD,16));
+       comenzar.setFont(new Font("Cooper Black",Font.BOLD,16));
        comenzar.setVisible(true);
        panel.add(comenzar,0);
        panel.repaint();

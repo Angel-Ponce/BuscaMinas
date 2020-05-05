@@ -93,22 +93,22 @@ public class Menu2 {
         
        boton[0].setForeground(Color.black);
        boton[0].setBackground(Color.cyan);
-       boton[0].setFont(new Font("Stencil",Font.BOLD,16));
+       boton[0].setFont(new Font("Cooper Black",Font.BOLD,16));
        
        boton[1].setForeground(Color.black);
        boton[1].setBackground(Color.yellow);
-       boton[1].setFont(new Font("Stencil",Font.BOLD,16));
+       boton[1].setFont(new Font("Cooper Black",Font.BOLD,16));
        
        boton[2].setForeground(Color.black);
        boton[2].setBackground(Color.green);
-       boton[2].setFont(new Font("Stencil",Font.BOLD,16));
+       boton[2].setFont(new Font("Cooper Black",Font.BOLD,15));
        
         boton[3].setText("REGRESAR");
-        boton[3].setSize(135,40);
+        boton[3].setSize(140,40);
         boton[3].setLocation(0,518);
         boton[3].setForeground(Color.BLACK);
         boton[3].setBackground(Color.red);
-        boton[3].setFont(new Font("Stencil",Font.BOLD,16));
+        boton[3].setFont(new Font("Cooper Black",Font.BOLD,16));
         boton[3].setVisible(true);
         panelm.add(boton[3],0);
         
@@ -118,7 +118,7 @@ public class Menu2 {
         boton[4].setForeground(Color.BLACK);
         boton[4].setBackground(Color.red);
         boton[4].setVisible(true);
-        boton[4].setFont(new Font("Stencil",Font.BOLD,16));
+        boton[4].setFont(new Font("Cooper Black",Font.BOLD,16));
         panelm.add(boton[4],0);
        
         for(int x=0; x<3; x++){

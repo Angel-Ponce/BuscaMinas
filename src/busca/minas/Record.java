@@ -51,7 +51,7 @@ public class Record {
         regresar.setForeground(Color.BLACK);
         regresar.setBackground(Color.red);
         regresar.setVisible(true);
-        regresar.setFont(new Font("Stencil",Font.BOLD,16));
+        regresar.setFont(new Font("Cooper Black",Font.BOLD,16));
         panelRecord.add(regresar,0);
        
         

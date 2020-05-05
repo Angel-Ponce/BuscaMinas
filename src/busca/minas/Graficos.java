@@ -62,7 +62,7 @@ public class Graficos extends JFrame {
         botonSalir.setLocation(0,525);
         botonSalir.setForeground(Color.BLACK);
         botonSalir.setBackground(Color.RED);
-        botonSalir.setFont(new Font("Stencil",Font.BOLD,16));
+        botonSalir.setFont(new Font("Cooper Black",Font.BOLD,16));
         botonSalir.setVisible(true);
         
         botonSalir.addMouseListener(new MouseAdapter(){
