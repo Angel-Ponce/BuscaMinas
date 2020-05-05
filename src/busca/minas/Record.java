@@ -31,7 +31,7 @@ public class Record {
     public void records(){
         
        ventanaRecords = new JFrame("Buscaminas");
-       ventanaRecords.setSize(558,590);
+       ventanaRecords.setSize(558,586);
        ventanaRecords.setLayout(null);
        ventanaRecords.setLocationRelativeTo(null);
        ventanaRecords.setResizable(false);
@@ -48,8 +48,8 @@ public class Record {
        regresar.setText("REGRESAR");
         regresar.setSize(135,40);
         regresar.setLocation(425,518);
-        regresar.setForeground(Color.white);
-        regresar.setBackground(Color.darkGray);
+        regresar.setForeground(Color.BLACK);
+        regresar.setBackground(Color.red);
         regresar.setVisible(true);
         regresar.setFont(new Font("Stencil",Font.BOLD,16));
         panelRecord.add(regresar,0);

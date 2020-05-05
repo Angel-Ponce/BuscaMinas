@@ -8,6 +8,7 @@ package busca.minas;
 
 import java.awt.Color;
 import java.awt.Font;                                            
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -33,22 +35,64 @@ public class Graficos extends JFrame {
     protected JFrame ventana;
     protected JPanel lienzo;
     protected static int i;
+    protected JButton botonSalir;
+    public int puntaje = 0;
+    protected JLabel puntajePantalla;
+    protected JLabel bombita;
   
     //Este metodo crea nuestra ventana con todas las propiedades ya listas
     public void crearVentana(){
         ventana = new JFrame();
-        ventana.setSize(530,553);
+        ventana.setSize(530,593);
         ventana.setLocationRelativeTo(null);
         ventana.setTitle("BUSCAMINAS");
-      //ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ventana.setResizable(false); 
         ventana.setVisible(true);  
         lienzo = new JPanel();
-        lienzo.setSize(530,525);
+        lienzo.setSize(530,565);
         lienzo.setLocation(0, 0);
         lienzo.setBackground(Color.gray);
         lienzo.setLayout(null);
         ventana.add(lienzo);
+        
+        botonSalir = new JButton();
+        botonSalir.setText("SALIR");
+        botonSalir.setSize(135,40);
+        botonSalir.setLocation(0,525);
+        botonSalir.setForeground(Color.BLACK);
+        botonSalir.setBackground(Color.RED);
+        botonSalir.setFont(new Font("Stencil",Font.BOLD,16));
+        botonSalir.setVisible(true);
+        
+        botonSalir.addMouseListener(new MouseAdapter(){
+        
+            @Override
+            public void mousePressed(MouseEvent e){
+                ventana.dispose();
+                Menu2 salir = new Menu2();
+                salir.menu();
+            }
+        });
+        lienzo.add(botonSalir);
+        
+        puntajePantalla = new JLabel();
+        puntajePantalla.setText("PUNTAJE: ");
+        puntajePantalla.setFont(new Font("Cooper Black",1,15));
+        puntajePantalla.setSize(135,40);
+        puntajePantalla.setLocation(390, 525);
+        puntajePantalla.setBackground(Color.gray);
+        puntajePantalla.setVisible(true);
+        puntajePantalla.setOpaque(true);
+        lienzo.add(puntajePantalla);
+        
+        bombita = new JLabel(new ImageIcon("Bomba.png"));
+        bombita.setVisible(true);
+        bombita.setSize(25,25);
+        bombita.setLocation(359, 532);
+        lienzo.add(bombita);
+        
+        
         
     }
     //Este metodo crea una cuadricula de JLabels interna, aquí se dibujaran las bombas y los números
@@ -81,6 +125,7 @@ public class Graficos extends JFrame {
                 nuevoBoton.setLocation(x,y);
                 nuevoBoton.setVisible(true); 
                 nuevoBoton.setBackground(Color.darkGray);
+                nuevoBoton.setText("");
                 lienzo.add(nuevoBoton);
                 listaBotones.add(nuevoBoton);
                 lienzo.repaint();
@@ -92,20 +137,50 @@ public class Graficos extends JFrame {
     //Con este metodo asignamos el evento clcik para todos los botones, asi sabremos cuando el usuario hace click sobre cualquiera de ellos.
     public void eventoClick(){
         
+        Menu2 score = new Menu2();
   
         for(JButton iterador: listaBotones){
             MouseListener click = new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent me) {
+                    
                      boolean valor;
+                  
                      iterador.setVisible(false);
                      i = listaBotones.indexOf(iterador);
                      listaCuadros.get(i).setVisible(true);
                      valor = encontrarMinas(i);
                      if(valor==false){
                          trifuersa(i);
+                         iterador.setText(null);
+                         puntaje+=puntajeTotal();
+                        
+                         
+                         puntajePantalla.setText(("PUNTAJE: "+puntaje));
+                         score.enviarPunteo(puntaje);
+                     }else{
+                        puntaje+=puntajeTotal();
+                        JOptionPane.showMessageDialog(null,"USTED HA PERDIDO SU PUNTAJE HA SIDO: "+puntaje);
+                        ventana.dispose();
+                        puntajePantalla.setText(("PUNTAJE: "+puntaje));
+                        score.enviarPunteo(puntaje);
+                        Menu2 retorno = new Menu2();
+                        retorno.menu();
+                        
+                        
                      }
                      
+                   if(algoritmoWin()==cantidadMinas){
+                    puntaje+=puntajeTotal();
+                    JOptionPane.showMessageDialog(null,"USTED HA GANADO FELICIDADES SU PUNTAJE HA SIDO: "+puntaje);
+                    ventana.dispose();
+                    puntajePantalla.setText(("PUNTAJE: "+puntaje));
+                    score.enviarPunteo(puntaje);
+                    Menu2 retorno = new Menu2();
+                    retorno.menu();
+                       
+                }
+                    
                 }
 
                 @Override
@@ -169,6 +244,7 @@ public class Graficos extends JFrame {
            minas[iterador] = pos;
            System.out.println(minas[iterador]);    
        }
+       System.out.println("---------------------------------------------------------------------------------");
        //En este for each, lo que se hace es que se sustituye un label tipo texto por un label tipo imagen
        //Se coloca y se guarda en la posicion exacta en el lienzo y en la lista de Labels
        for(int it: minas){
@@ -295,6 +371,13 @@ public class Graficos extends JFrame {
             listaCuadros.get(i2).setText(Integer.toString(suma));
            
             if(suma==0){
+                // EN PRUEBA
+                listaBotones.get(derecha).setText(null);
+           
+                listaBotones.get(abajo).setText(null);
+              
+                
+                listaBotones.get(i2).setText(null);
                 listaCuadros.get(i2).setText(null);           //Vamos a ponerle un indicador null a los labels donde ya hayamos hecho el algoritmos trifuersa
                 listaBotones.get(derecha).setVisible(false);  //en las posiciones cruz donde no hay mina apagar los botones.
                 listaBotones.get(abajo).setVisible(false);    //en las posiciones cruz donde no hay mina apagar los botones.
@@ -303,9 +386,11 @@ public class Graficos extends JFrame {
                 
                 if(listaCuadros.get(derecha).getText()!=null){
                 trifuersa(derecha); //Realizar el procedimiento en los cuadros que regalara el algoritmo.
+                
                 }
                 if(listaCuadros.get(abajo).getText()!=null){
                 trifuersa(abajo); //Realizar el procedimiento en los cuadros que regalara el algoritmo
+                 
                 }
             }
           
@@ -318,6 +403,12 @@ public class Graficos extends JFrame {
             listaCuadros.get(i2).setText(Integer.toString(suma));
             
             if(suma==0){
+                //EN PRUEBA
+                listaBotones.get(arriba).setText(null);
+                listaBotones.get(derecha).setText(null);
+                 
+                
+                listaBotones.get(i2).setText(null);
                 listaCuadros.get(i2).setText(null);
                 listaBotones.get(arriba).setVisible(false);
                 listaBotones.get(derecha).setVisible(false);
@@ -326,9 +417,11 @@ public class Graficos extends JFrame {
                 
                 if(listaCuadros.get(derecha).getText()!=null){
                     trifuersa(derecha);
+                     
                 }
                 if(listaCuadros.get(arriba).getText()!=null){
                     trifuersa(arriba);
+                     
                 }
                 
                 
@@ -347,6 +440,13 @@ public class Graficos extends JFrame {
              
              
              if(suma==0){
+                 //EN PRUEBA
+                 listaBotones.get(arriba).setText(null);
+                 listaBotones.get(abajo).setText(null);
+                 listaBotones.get(derecha).setText(null);
+              
+                 
+                 listaBotones.get(i2).setText(null);
                  listaCuadros.get(i2).setText(null);
                  listaBotones.get(arriba).setVisible(false);
                  listaBotones.get(abajo).setVisible(false);
@@ -357,12 +457,15 @@ public class Graficos extends JFrame {
                  
                  if(listaCuadros.get(arriba).getText()!=null){
                      trifuersa(arriba);
+                     
                  }
                   if(listaCuadros.get(abajo).getText()!=null){
                      trifuersa(abajo);
+                      
                  }
                    if(listaCuadros.get(derecha).getText()!=null){
                      trifuersa(derecha);
+                     
                  }
                  
                  
@@ -383,6 +486,12 @@ public class Graficos extends JFrame {
             listaCuadros.get(i2).setText(Integer.toString(suma));
             
             if(suma==0){
+                //EN PRUEBA
+                listaBotones.get(izquierda).setText(null);
+                listaBotones.get(abajo).setText(null);
+                
+                
+                listaBotones.get(i2).setText(null);
                 listaCuadros.get(i2).setText(null);
                 listaBotones.get(izquierda).setVisible(false);
                 listaBotones.get(abajo).setVisible(false);
@@ -391,10 +500,12 @@ public class Graficos extends JFrame {
                 
                 
                 if(listaCuadros.get(izquierda).getText()!=null){
-                    trifuersa(izquierda);  
+                    trifuersa(izquierda);
+                     
                 }
                 if(listaCuadros.get(abajo).getText()!=null){
                     trifuersa(abajo);
+                    
                 }
             } 
         }else{
@@ -409,6 +520,13 @@ public class Graficos extends JFrame {
             listaCuadros.get(i2).setText(Integer.toString(suma));
             
           if(suma==0){
+                //EN PRUEBA
+                listaBotones.get(abajo).setText(null);
+                listaBotones.get(izquierda).setText(null);
+                listaBotones.get(derecha).setText(null);
+                
+              
+                listaBotones.get(i2).setText(null);
                 listaCuadros.get(i2).setText(null);
                 listaBotones.get(izquierda).setVisible(false);
                 listaBotones.get(abajo).setVisible(false);
@@ -419,13 +537,16 @@ public class Graficos extends JFrame {
                 
                 
                 if(listaCuadros.get(izquierda).getText()!=null){
-                    trifuersa(izquierda);  
+                    trifuersa(izquierda);
+                     
                 }
                 if(listaCuadros.get(abajo).getText()!=null){
                     trifuersa(abajo);
+                     
                 }
                 if(listaCuadros.get(derecha).getText()!=null){
                     trifuersa(derecha);
+                     
                 }
             } 
             
@@ -445,6 +566,12 @@ public class Graficos extends JFrame {
              listaCuadros.get(i2).setText(Integer.toString(suma));
              
              if(suma==0){
+                 //EN PRUEBA
+                 listaBotones.get(izquierda).setText(null);
+                 listaBotones.get(arriba).setText(null);
+                
+                 
+                 listaBotones.get(i2).setText(null);
                  listaCuadros.get(i2).setText(null);
                  listaBotones.get(izquierda).setVisible(false);
                  listaCuadros.get(izquierda).setVisible(true);
@@ -452,10 +579,12 @@ public class Graficos extends JFrame {
                  listaBotones.get(arriba).setVisible(false);
                  
                  if(listaCuadros.get(izquierda).getText()!=null){
-                    trifuersa(izquierda);  
+                    trifuersa(izquierda);
+                    
                 }
                 if(listaCuadros.get(arriba).getText()!=null){
                     trifuersa(arriba);
+                     
                 }
              } 
          }else{
@@ -470,6 +599,12 @@ public class Graficos extends JFrame {
              listaCuadros.get(i2).setText(Integer.toString(suma));
              
              if(suma==0){
+                 //EN PRUEBA
+                 listaBotones.get(arriba).setText(null);
+                 listaBotones.get(izquierda).setText(null);
+                 listaBotones.get(abajo).setText(null);
+                 
+                 listaBotones.get(i2).setText(null);
                  listaCuadros.get(i2).setText(null);
                  listaBotones.get(izquierda).setVisible(false);
                  listaCuadros.get(izquierda).setVisible(true);
@@ -479,13 +614,16 @@ public class Graficos extends JFrame {
                  listaBotones.get(abajo).setVisible(false);
                  
                 if(listaCuadros.get(izquierda).getText()!=null){
-                    trifuersa(izquierda);  
+                    trifuersa(izquierda);
+                    
                 }
                 if(listaCuadros.get(arriba).getText()!=null){
                     trifuersa(arriba);
+                     
                 }
                 if(listaCuadros.get(abajo).getText()!=null){
                     trifuersa(abajo);
+                    
                 }
              }
          }
@@ -504,6 +642,12 @@ public class Graficos extends JFrame {
          listaCuadros.get(i2).setText(Integer.toString(suma));
          
          if(suma==0){
+             //EN PRUEBA
+                 listaBotones.get(izquierda).setText(null);
+                 listaBotones.get(arriba).setText(null);
+                 listaBotones.get(derecha).setText(null);
+                 
+                 listaBotones.get(i2).setText(null);
                  listaCuadros.get(i2).setText(null);
                  listaBotones.get(izquierda).setVisible(false);
                  listaCuadros.get(izquierda).setVisible(true);
@@ -513,13 +657,16 @@ public class Graficos extends JFrame {
                  listaBotones.get(derecha).setVisible(false);
                  
                 if(listaCuadros.get(izquierda).getText()!=null){
-                    trifuersa(izquierda);  
+                    trifuersa(izquierda);
+                     
                 }
                 if(listaCuadros.get(arriba).getText()!=null){
                     trifuersa(arriba);
+                    
                 }
                 if(listaCuadros.get(derecha).getText()!=null){
                     trifuersa(derecha);
+                    
                 }
              }  
      }//Fin de la horizontal 2
@@ -540,6 +687,13 @@ public class Graficos extends JFrame {
          listaCuadros.get(i2).setText(Integer.toString(suma));
          
              if(suma==0){
+                 //EN PRUEBA
+                 listaBotones.get(i2).setText(null);
+                 listaBotones.get(arriba).setText(null);
+                 listaBotones.get(abajo).setText(null);
+                 listaBotones.get(izquierda).setText(null);
+                 listaBotones.get(derecha).setText(null);
+                 
                  listaCuadros.get(i2).setText(null);
                  listaBotones.get(izquierda).setVisible(false);
                  listaCuadros.get(izquierda).setVisible(true);
@@ -551,18 +705,47 @@ public class Graficos extends JFrame {
                  listaBotones.get(abajo).setVisible(false);
                  
                 if(listaCuadros.get(izquierda).getText()!=null){
-                    trifuersa(izquierda);  
+                    trifuersa(izquierda);
+                    
                 }
                 if(listaCuadros.get(arriba).getText()!=null){
                     trifuersa(arriba);
+                     
                 }
                 if(listaCuadros.get(derecha).getText()!=null){
                     trifuersa(derecha);
+                    
                 }
                 if(listaCuadros.get(abajo).getText()!=null){
                     trifuersa(abajo);
+                    
                 }
              }//Fin cuadricula central
      }
   }
+   
+ public int algoritmoWin(){
+     int suma = 0;
+        
+            for(JButton boton: listaBotones){
+                
+                if(boton.getText()!=" "){
+                    suma++;
+                }
+            }
+     return suma;       
+ }
+public int puntajeTotal(){
+    int suma = 0;
+    for(JButton botones: listaBotones){
+        if(botones.getText() == null){
+            suma++;
+            botones.setText(" ");
+        }
+    }
+    return suma;
+} 
+ 
+ 
+       
 }
