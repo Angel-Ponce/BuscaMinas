@@ -9,6 +9,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,6 +46,15 @@ public class Menu2 {
     JButton boton[];
     JPanel panelm;
     JLabel fondom;
+    
+    File texto;
+    BufferedWriter textoBuffer;
+    FileReader textoR;
+    BufferedReader textoBR;
+    PrintWriter textoP;
+    
+    ArrayList<String>listaNombres = new ArrayList();
+    ArrayList<Integer>listaPunteos = new ArrayList();
     
     public void menu(){
         
@@ -131,12 +151,16 @@ public class Menu2 {
             if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
                 JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
             }else{
+                
+                listaNombres.add(nombre);
+                
             ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
             juego.crearCuadricula();
             juego.crearBotones();
             juego.dibujarMinas(1);
+            
             }
           
             }
@@ -154,6 +178,9 @@ public class Menu2 {
             if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
                 JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
             }else{
+                
+                listaNombres.add(nombre);
+                
             ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
@@ -177,6 +204,9 @@ public class Menu2 {
             if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
                 JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
             }else{
+                
+                listaNombres.add(nombre);
+                
             ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
@@ -213,6 +243,12 @@ public class Menu2 {
         });
         
     }
-      
+    
+    
+    public void  enviarPunteo(int h){
+        
+        listaPunteos.add(h);
+        
+    }
     
 }

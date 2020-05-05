@@ -137,6 +137,7 @@ public class Graficos extends JFrame {
     //Con este metodo asignamos el evento clcik para todos los botones, asi sabremos cuando el usuario hace click sobre cualquiera de ellos.
     public void eventoClick(){
         
+        Menu2 score = new Menu2();
   
         for(JButton iterador: listaBotones){
             MouseListener click = new MouseListener() {
@@ -156,11 +157,13 @@ public class Graficos extends JFrame {
                         
                          
                          puntajePantalla.setText(("PUNTAJE: "+puntaje));
+                         score.enviarPunteo(puntaje);
                      }else{
                         puntaje+=puntajeTotal();
                         JOptionPane.showMessageDialog(null,"USTED HA PERDIDO SU PUNTAJE HA SIDO: "+puntaje);
                         ventana.dispose();
                         puntajePantalla.setText(("PUNTAJE: "+puntaje));
+                        score.enviarPunteo(puntaje);
                         Menu2 retorno = new Menu2();
                         retorno.menu();
                         
@@ -172,6 +175,7 @@ public class Graficos extends JFrame {
                     JOptionPane.showMessageDialog(null,"USTED HA GANADO FELICIDADES SU PUNTAJE HA SIDO: "+puntaje);
                     ventana.dispose();
                     puntajePantalla.setText(("PUNTAJE: "+puntaje));
+                    score.enviarPunteo(puntaje);
                     Menu2 retorno = new Menu2();
                     retorno.menu();
                        
