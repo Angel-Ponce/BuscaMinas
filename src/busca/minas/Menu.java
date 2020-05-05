@@ -37,7 +37,7 @@ public class Menu {
     public void iniciar(){
         
        ventana = new JFrame("Buscaminas");
-       ventana.setSize(558,590);
+       ventana.setSize(558,586);
        ventana.setLayout(null);
        ventana.setLocationRelativeTo(null);
        ventana.setResizable(false);
@@ -46,19 +46,13 @@ public class Menu {
        
        panel = new JPanel();
        panel.setLayout(null);
-       //panel.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
-       panel.setSize(558,558);
+       panel.setSize(558,590);
        panel.setVisible(true);
        
        ventana.add(panel);
        
-       comenzar = new JButton("Inicio");
-       comenzar.setBounds(220, 230, 120, 50);
-       comenzar.setForeground(Color.black);
-       comenzar.setBackground(Color.red);
-       comenzar.setFont(new Font("Stencil",Font.BOLD,16));
-       comenzar.setVisible(true);
-       panel.add(comenzar);
+     
+       
        
        fondo = new JLabel(new ImageIcon("Buscaminas.png"));
        //fondo.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
@@ -66,9 +60,16 @@ public class Menu {
        fondo.setOpaque(true);
        fondo.setVisible(true);
        panel.add(fondo,0);
-       panel.repaint();
+
        
-       //ventana.add(panel);
+       comenzar = new JButton("Inicio");
+       comenzar.setBounds(220, 230, 120, 50);
+       comenzar.setForeground(Color.black);
+       comenzar.setBackground(Color.red);
+       comenzar.setFont(new Font("Stencil",Font.BOLD,16));
+       comenzar.setVisible(true);
+       panel.add(comenzar,0);
+       panel.repaint();
        
        
        

@@ -15,23 +15,9 @@ public class Principal {
         
         iniciarjuego = new Menu();
         iniciarjuego.iniciar();
-       
-       
-       // juego = new Graficos();
-       // juego.crearVentana();
-       // juego.crearCuadricula(); 
-       // juego.crearBotones();  
-       // juego.dibujarMinas(3);
-    }
     
-//    public void inicio(int k){
-//        
-//        juego = new Graficos();
-//        juego.crearVentana();
-//        juego.crearCuadricula(); 
-//        juego.crearBotones();
-//        juego.dibujarMinas(k);
-//    }
+    }
+  
     }
 
     

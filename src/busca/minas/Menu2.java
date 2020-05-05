@@ -46,7 +46,7 @@ public class Menu2 {
         
        ventanam = new JFrame();
        ventanam = new JFrame("Buscaminas");
-       ventanam.setSize(558,590);
+       ventanam.setSize(558,586);
        ventanam.setLayout(null);
        ventanam.setLocationRelativeTo(null);
        ventanam.setResizable(false);
@@ -60,8 +60,7 @@ public class Menu2 {
         panelm.setVisible(true);
         ventanam.add(panelm);
         
-        fondom = new JLabel(new ImageIcon("Buscaminas.png"));
-       //fondo.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
+       fondom = new JLabel(new ImageIcon("Buscaminas.png"));
        fondom.setSize(558,558);
        fondom.setOpaque(true);
        fondom.setVisible(true);
@@ -84,20 +83,20 @@ public class Menu2 {
        boton[2].setBackground(Color.green);
        boton[2].setFont(new Font("Stencil",Font.BOLD,16));
        
-       boton[3].setText("REGRESAR");
+        boton[3].setText("REGRESAR");
         boton[3].setSize(135,40);
         boton[3].setLocation(0,518);
-        boton[3].setForeground(Color.white);
-        boton[3].setBackground(Color.darkGray);
+        boton[3].setForeground(Color.BLACK);
+        boton[3].setBackground(Color.red);
         boton[3].setFont(new Font("Stencil",Font.BOLD,16));
         boton[3].setVisible(true);
         panelm.add(boton[3],0);
         
         boton[4].setText("RECORDS");
         boton[4].setSize(135,40);
-        boton[4].setLocation(425,518);
-        boton[4].setForeground(Color.white);
-        boton[4].setBackground(Color.darkGray);
+        boton[4].setLocation(416,518);
+        boton[4].setForeground(Color.BLACK);
+        boton[4].setBackground(Color.red);
         boton[4].setVisible(true);
         boton[4].setFont(new Font("Stencil",Font.BOLD,16));
         panelm.add(boton[4],0);
@@ -118,23 +117,29 @@ public class Menu2 {
         
         boton[0].addMouseListener(new MouseAdapter(){
             
+            @Override
             public void mousePressed(MouseEvent e){
                 
                 //Principal ob = new Principal(0);
                 
-                
-           
-            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Escribir");
-            while (nombre==null || nombre.compareTo("Escribir")==0 || nombre.compareTo("")==0){
-                nombre = JOptionPane.showInputDialog(ventana, "Debe registrarse");
-            }
             
+           
+            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Nick");
+            
+            if(nombre!=null){    
+            
+            if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
+                JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
+            }else{
+            ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
             juego.crearCuadricula();
             juego.crearBotones();
             juego.dibujarMinas(1);
-            
+            }
+          
+            }
             }
         });
         
@@ -143,16 +148,20 @@ public class Menu2 {
             public void mousePressed(MouseEvent e){
                 //Principal ob = new Principal(1);
            
-            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Escribir");
-            while (nombre==null || nombre.compareTo("Escribir")==0 || nombre.compareTo("")==0){
-                nombre = JOptionPane.showInputDialog(ventana, "Debe registrarse");
-            }
+            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Nick");
             
+            if(nombre!=null){
+            if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
+                JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
+            }else{
+            ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
             juego.crearCuadricula();
             juego.crearBotones();
             juego.dibujarMinas(2);
+            }
+            }
             
             }
         });
@@ -162,17 +171,20 @@ public class Menu2 {
             public void mousePressed(MouseEvent e){
            //Principal ob = new Principal(3);
                 
-            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Escribir");
-            while (nombre==null || nombre.compareTo("Escribir")==0 || nombre.compareTo("")==0){
-                nombre = JOptionPane.showInputDialog(ventana, "Debe registrarse");
-            }
-            
+            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Nick");
+           
+            if(nombre!=null){
+            if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
+                JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
+            }else{
+            ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
             juego.crearCuadricula();
             juego.crearBotones();
             juego.dibujarMinas(3);
-            
+            }
+            }
             }
         });
         
@@ -201,5 +213,6 @@ public class Menu2 {
         });
         
     }
+      
     
 }
