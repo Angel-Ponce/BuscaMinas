@@ -47,14 +47,7 @@ public class Menu2 {
     JPanel panelm;
     JLabel fondom;
     
-    File texto;
-    BufferedWriter textoBuffer;
-    FileReader textoR;
-    BufferedReader textoBR;
-    PrintWriter textoP;
-    
-    ArrayList<String>listaNombres = new ArrayList();
-    ArrayList<Integer>listaPunteos = new ArrayList();
+    static public int punteo;
     
     public void menu(){
         
@@ -85,6 +78,7 @@ public class Menu2 {
        fondom.setOpaque(true);
        fondom.setVisible(true);
        panelm.add(fondom,0);
+       
        panelm.repaint();
         
         boton[0].setText("FACIL");
@@ -134,7 +128,7 @@ public class Menu2 {
     }
     
     public void eventosmenu(){
-        
+        Graficos jugador = new Graficos();
         boton[0].addMouseListener(new MouseAdapter(){
             
             @Override
@@ -152,7 +146,9 @@ public class Menu2 {
                 JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
             }else{
                 
-                listaNombres.add(nombre);
+                jugador.setNombre(nombre);
+                jugador.setDificultad("FÁCIL");
+//               
                 
             ventanam.dispose();
             Graficos juego = new Graficos();
@@ -179,8 +175,9 @@ public class Menu2 {
                 JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
             }else{
                 
-                listaNombres.add(nombre);
-                
+           jugador.setNombre(nombre);
+           jugador.setDificultad("MEDIO");
+
             ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
@@ -204,9 +201,10 @@ public class Menu2 {
             if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
                 JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
             }else{
-                
-                listaNombres.add(nombre);
-                
+               
+                jugador.setNombre(nombre);
+                jugador.setDificultad("DEMENTE");
+              
             ventanam.dispose();
             Graficos juego = new Graficos();
             juego.crearVentana();
@@ -226,15 +224,12 @@ public class Menu2 {
                 Menu ob = new Menu();
                 ob.iniciar();
                 
-
-            
-            
             }
         });
         
         boton[4].addMouseListener(new MouseAdapter(){
             
-            public void mousePressed(MouseEvent e){
+           public void mousePressed(MouseEvent e){
            Record ob = new Record();
            ob.records();
            ventanam.setVisible(false);
@@ -246,9 +241,33 @@ public class Menu2 {
     
     
     public void  enviarPunteo(int h){
-        
-        listaPunteos.add(h);
-        
+       punteo = h;
     }
+    
+    public String agregarJugador(String nombre, String dificultad, int score){
+            FileWriter fichero = null;
+            PrintWriter pw = null;
+            try{ 
+                fichero = new FileWriter("Records.txt",true);
+                pw = new PrintWriter(fichero);
+                
+                pw.println(nombre + "," + dificultad + "," + score);
+        
+            }catch(FileNotFoundException ex){  
+            }catch(IOException er){
+                
+            }
+            finally {
+                try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero)
+                   fichero.close();
+                } catch (Exception e2) {
+                   e2.printStackTrace();
+                }
+             }
+            return nombre;
+            }
     
 }

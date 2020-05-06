@@ -39,6 +39,8 @@ public class Graficos extends JFrame {
     public int puntaje = 0;
     protected JLabel puntajePantalla;
     protected JLabel bombita;
+    private static String nombre;
+    private static String dificultad;
   
     //Este metodo crea nuestra ventana con todas las propiedades ya listas
     public void crearVentana(){
@@ -137,7 +139,7 @@ public class Graficos extends JFrame {
     //Con este metodo asignamos el evento clcik para todos los botones, asi sabremos cuando el usuario hace click sobre cualquiera de ellos.
     public void eventoClick(){
         
-        Menu2 score = new Menu2();
+        Menu2 jugador = new Menu2();
   
         for(JButton iterador: listaBotones){
             MouseListener click = new MouseListener() {
@@ -157,17 +159,17 @@ public class Graficos extends JFrame {
                         
                          
                          puntajePantalla.setText(("PUNTAJE: "+puntaje));
-                         score.enviarPunteo(puntaje);
+//                         score.enviarPunteo(puntaje);
                      }else{
                         puntaje+=puntajeTotal();
                         JOptionPane.showMessageDialog(null,"USTED HA PERDIDO SU PUNTAJE HA SIDO: "+puntaje);
                         ventana.dispose();
                         puntajePantalla.setText(("PUNTAJE: "+puntaje));
-                        score.enviarPunteo(puntaje);
+                        jugador.agregarJugador(nombre, dificultad, puntaje);
                         Menu2 retorno = new Menu2();
                         retorno.menu();
                         
-                        
+                    
                      }
                      
                    if(algoritmoWin()==cantidadMinas){
@@ -175,7 +177,7 @@ public class Graficos extends JFrame {
                     JOptionPane.showMessageDialog(null,"USTED HA GANADO FELICIDADES SU PUNTAJE HA SIDO: "+puntaje);
                     ventana.dispose();
                     puntajePantalla.setText(("PUNTAJE: "+puntaje));
-                    score.enviarPunteo(puntaje);
+                    jugador.agregarJugador(nombre, dificultad, puntaje);
                     Menu2 retorno = new Menu2();
                     retorno.menu();
                        
@@ -745,6 +747,34 @@ public int puntajeTotal(){
     }
     return suma;
 } 
+
+    /**
+     * @return the nombre
+     */
+    public static String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param aNombre the nombre to set
+     */
+    public static void setNombre(String aNombre) {
+        nombre = aNombre;
+    }
+
+    /**
+     * @return the dificultad
+     */
+    public static String getDificultad() {
+        return dificultad;
+    }
+
+    /**
+     * @param aDificultad the dificultad to set
+     */
+    public static void setDificultad(String aDificultad) {
+        dificultad = aDificultad;
+    }
  
  
        
