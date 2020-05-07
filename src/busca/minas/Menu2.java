@@ -46,6 +46,7 @@ public class Menu2 {
     JButton boton[];
     JPanel panelm;
     JLabel fondom;
+    private static String dificultad;
     
     static public int punteo;
     
@@ -81,7 +82,7 @@ public class Menu2 {
        
        panelm.repaint();
         
-        boton[0].setText("FACIL");
+        boton[0].setText("FÁCIL");
         boton[1].setText("MEDIO");
         boton[2].setText("DEMENTE");
         
@@ -128,38 +129,17 @@ public class Menu2 {
     }
     
     public void eventosmenu(){
+        Emergentes nombres = new Emergentes();
         Graficos jugador = new Graficos();
         boton[0].addMouseListener(new MouseAdapter(){
             
             @Override
             public void mousePressed(MouseEvent e){
                 
-                //Principal ob = new Principal(0);
-                
-            
-           
-            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Nick");
-            
-            if(nombre!=null){    
-            
-            if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
-                JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
-            }else{
-                
-                jugador.setNombre(nombre);
-                jugador.setDificultad("FÁCIL");
-//               
-                
+            jugador.setDificultad("FÁCIL");
+            dificultad = "FÁCIL";
             ventanam.dispose();
-            Graficos juego = new Graficos();
-            juego.crearVentana();
-            juego.crearCuadricula();
-            juego.crearBotones();
-            juego.dibujarMinas(1);
-            
-            }
-          
-            }
+            nombres.pedirNombre(1);
             }
         });
         
@@ -167,25 +147,11 @@ public class Menu2 {
             
             public void mousePressed(MouseEvent e){
                 //Principal ob = new Principal(1);
-           
-            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Nick");
-            
-            if(nombre!=null){
-            if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
-                JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
-            }else{
-                
-           jugador.setNombre(nombre);
-           jugador.setDificultad("MEDIO");
-
+             jugador.setDificultad("MEDIO");
+            dificultad = "MEDIO";
             ventanam.dispose();
-            Graficos juego = new Graficos();
-            juego.crearVentana();
-            juego.crearCuadricula();
-            juego.crearBotones();
-            juego.dibujarMinas(2);
-            }
-            }
+            nombres.pedirNombre(2);
+           
             
             }
         });
@@ -193,26 +159,11 @@ public class Menu2 {
         boton[2].addMouseListener(new MouseAdapter(){
             
             public void mousePressed(MouseEvent e){
-           //Principal ob = new Principal(3);
-                
-            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Nick");
-           
-            if(nombre!=null){
-            if(nombre.equals(null) || nombre.equals("") || nombre.equals("Nick")){
-                JOptionPane.showMessageDialog(ventana,"Necesita un nombre para poder jugar");
-            }else{
-               
-                jugador.setNombre(nombre);
-                jugador.setDificultad("DEMENTE");
-              
+             jugador.setDificultad("DEMENTE");
+            dificultad = "DEMENTE";
             ventanam.dispose();
-            Graficos juego = new Graficos();
-            juego.crearVentana();
-            juego.crearCuadricula();
-            juego.crearBotones();
-            juego.dibujarMinas(3);
-            }
-            }
+            nombres.pedirNombre(3);
+          
             }
         });
         
@@ -251,7 +202,7 @@ public class Menu2 {
                 fichero = new FileWriter("Records.txt",true);
                 pw = new PrintWriter(fichero);
                 
-                pw.println(nombre + "," + dificultad + "," + score);
+                pw.println(nombre+","+dificultad+","+score);
         
             }catch(FileNotFoundException ex){  
             }catch(IOException er){
@@ -269,5 +220,19 @@ public class Menu2 {
              }
             return nombre;
             }
+
+    /**
+     * @return the dificultad
+     */
+    public String getDificultad() {
+        return dificultad;
+    }
+
+    /**
+     * @param dificultad the dificultad to set
+     */
+    public void setDificultad(String dificultad) {
+        this.dificultad = dificultad;
+    }
     
 }

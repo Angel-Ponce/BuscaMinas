@@ -36,7 +36,7 @@ public class Menu {
     
     public void iniciar(){
         
-       ventana = new JFrame("Buscaminas");
+       ventana = new JFrame();
        ventana.setSize(558,586);
        ventana.setLayout(null);
        ventana.setLocationRelativeTo(null);
@@ -50,9 +50,6 @@ public class Menu {
        panel.setVisible(true);
        
        ventana.add(panel);
-       
-     
-       
        
        fondo = new JLabel(new ImageIcon("Buscaminas.png"));
        //fondo.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
@@ -85,155 +82,5 @@ public class Menu {
            
        });
        
-    }
-    
-//    public void menu(){
-//        
-//        boton = new JButton[5];
-//       for(int x=0; x<boton.length; x++){
-//           boton[x] = new JButton();
-//           
-//       }
-//        
-//       ventanam = new JFrame();
-//       ventanam = new JFrame("Buscaminas");
-//       ventanam.setSize(558,590);
-//       ventanam.setLayout(null);
-//       ventanam.setLocationRelativeTo(null);
-//       ventanam.setResizable(false);
-//       ventanam.setVisible(true);
-//       ventanam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        
-//        panel.setVisible(true);
-//        panelm = new JPanel();
-//        panelm.setLayout(null);
-//        panelm.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
-//        panelm.setVisible(true);
-//        ventanam.add(panelm);
-//        
-//        fondom = new JLabel(new ImageIcon("Buscaminas.png"));
-//       //fondo.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
-//       fondom.setSize(558,558);
-//       fondom.setOpaque(true);
-//       fondom.setVisible(true);
-//       panelm.add(fondom,0);
-//       panelm.repaint();
-//        
-//        boton[0].setText("FACIL");
-//        boton[1].setText("MEDIO");
-//        boton[2].setText("DEMENTE");
-//        
-//       boton[0].setForeground(Color.black);
-//       boton[0].setBackground(Color.cyan);
-//       boton[0].setFont(new Font("Stencil",Font.BOLD,16));
-//       
-//       boton[1].setForeground(Color.black);
-//       boton[1].setBackground(Color.yellow);
-//       boton[1].setFont(new Font("Stencil",Font.BOLD,16));
-//       
-//       boton[2].setForeground(Color.black);
-//       boton[2].setBackground(Color.green);
-//       boton[2].setFont(new Font("Stencil",Font.BOLD,16));
-//       
-//       boton[3].setText("REGRESAR");
-//        boton[3].setSize(135,40);
-//        boton[3].setLocation(0,518);
-//        boton[3].setForeground(Color.white);
-//        boton[3].setBackground(Color.darkGray);
-//        boton[3].setFont(new Font("Stencil",Font.BOLD,16));
-//        boton[3].setVisible(true);
-//        panelm.add(boton[3],0);
-//        
-//        boton[4].setText("RECORDS");
-//        boton[4].setSize(135,40);
-//        boton[4].setLocation(425,518);
-//        boton[4].setForeground(Color.white);
-//        boton[4].setBackground(Color.darkGray);
-//        boton[4].setVisible(true);
-//        boton[4].setFont(new Font("Stencil",Font.BOLD,16));
-//        panelm.add(boton[4],0);
-//       
-//        for(int x=0; x<3; x++){
-//            boton[x].setBounds(220,(x+3)*60,120,50);
-//            boton[x].setVisible(true);
-//            panelm.add(boton[x],0);
-//            
-//        }
-//        
-//        panelm.repaint();
-//        eventosmenu();
-//        
-//    }
-//    
-//    public void eventosmenu(){
-//        
-//        boton[0].addMouseListener(new MouseAdapter(){
-//            
-//            public void mousePressed(MouseEvent e){
-//                
-//                //Principal ob = new Principal(0);
-//                
-//                
-//           
-//            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Escribir");
-//            while (nombre==null || nombre.compareTo("Escribir")==0 || nombre.compareTo("")==0){
-//                nombre = JOptionPane.showInputDialog(ventana, "Debe registrarse");
-//            }
-//            
-//            }
-//        });
-//        
-//        boton[1].addMouseListener(new MouseAdapter(){
-//            
-//            public void mousePressed(MouseEvent e){
-//                //Principal ob = new Principal(1);
-//           
-//            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Escribir");
-//            while (nombre==null || nombre.compareTo("Escribir")==0 || nombre.compareTo("")==0){
-//                nombre = JOptionPane.showInputDialog(ventana, "Debe registrarse");
-//            }
-//            
-//            
-//            }
-//        });
-//        
-//        boton[2].addMouseListener(new MouseAdapter(){
-//            
-//            public void mousePressed(MouseEvent e){
-//           //Principal ob = new Principal(3);
-//                
-//            nombre = JOptionPane.showInputDialog(ventana,"Nombre del jugador","Escribir");
-//            while (nombre==null || nombre.compareTo("Escribir")==0 || nombre.compareTo("")==0){
-//                nombre = JOptionPane.showInputDialog(ventana, "Debe registrarse");
-//            }
-//            
-//            
-//            }
-//        });
-//        
-//        boton[3].addMouseListener(new MouseAdapter(){
-//            
-//            public void mousePressed(MouseEvent e){
-//                
-//                ventanam.setVisible(false);
-//                ventana.setVisible(true);
-//                panel.setVisible(true);
-//
-//            
-//            
-//            }
-//        });
-//        
-//        boton[4].addMouseListener(new MouseAdapter(){
-//            
-//            public void mousePressed(MouseEvent e){
-//           Record ob = new Record();
-//           ob.records();
-//           ventanam.setVisible(false);
-//              
-//            }
-//        });
-//        
-//    }
-    
+    }    
 }
