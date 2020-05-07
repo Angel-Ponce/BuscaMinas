@@ -1,1 +1,4 @@
-﻿
+﻿One,FÁCIL,359
+has,MEDIO,243
+nas,DEMENTE,3
+hna,FÁCIL,356
