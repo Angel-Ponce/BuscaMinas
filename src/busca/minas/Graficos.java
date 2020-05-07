@@ -8,11 +8,15 @@ package busca.minas;
 
 import java.awt.Color;
 import java.awt.Font;                                            
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 //import javax.swing.JPanel;
 /**
@@ -32,7 +37,7 @@ public class Graficos extends JFrame {
     //Creamos una lista para almacenar todos los elementos del juego.
     protected ArrayList<JButton> listaBotones = new ArrayList();
     protected ArrayList<JLabel>  listaCuadros = new ArrayList();
-    protected JFrame ventana;
+    public static JFrame ventana;
     protected JPanel lienzo;
     protected static int i;
     protected JButton botonSalir;
@@ -41,7 +46,7 @@ public class Graficos extends JFrame {
     protected JLabel bombita;
     private static String nombre;
     private static String dificultad;
-  
+   
     //Este metodo crea nuestra ventana con todas las propiedades ya listas
     public void crearVentana(){
         ventana = new JFrame();
@@ -55,6 +60,7 @@ public class Graficos extends JFrame {
         lienzo.setSize(530,565);
         lienzo.setLocation(0, 0);
         lienzo.setBackground(Color.gray);
+        lienzo.setVisible(true);
         lienzo.setLayout(null);
         ventana.add(lienzo);
         
@@ -140,6 +146,7 @@ public class Graficos extends JFrame {
     public void eventoClick(){
         
         Menu2 jugador = new Menu2();
+        Emergentes ventanaEmergente = new Emergentes();
   
         for(JButton iterador: listaBotones){
             MouseListener click = new MouseListener() {
@@ -156,31 +163,34 @@ public class Graficos extends JFrame {
                          trifuersa(i);
                          iterador.setText(null);
                          puntaje+=puntajeTotal();
-                        
-                         
                          puntajePantalla.setText(("PUNTAJE: "+puntaje));
-//                         score.enviarPunteo(puntaje);
                      }else{
                         puntaje+=puntajeTotal();
-                        JOptionPane.showMessageDialog(null,"USTED HA PERDIDO SU PUNTAJE HA SIDO: "+puntaje);
-                        ventana.dispose();
+                        //ventana.dispose();
+                        //JOptionPane.showMessageDialog(null,"USTED HA PERDIDO"+"\n"+"SU PUNTAJE HA SIDO: "+puntaje);
+                        //ventana.setVisible(false);
                         puntajePantalla.setText(("PUNTAJE: "+puntaje));
                         jugador.agregarJugador(nombre, dificultad, puntaje);
                         Menu2 retorno = new Menu2();
-                        retorno.menu();
+                        boolean cerrar = ventanaEmergente.exit();
+                        ventanaEmergente.estadoLose(puntaje);
                         
-                    
+                        //ventana.dispose();
+                        
+                        //retorno.menu();
                      }
-                     
+                  
                    if(algoritmoWin()==cantidadMinas){
                     puntaje+=puntajeTotal();
-                    JOptionPane.showMessageDialog(null,"USTED HA GANADO FELICIDADES SU PUNTAJE HA SIDO: "+puntaje);
-                    ventana.dispose();
+                    //JOptionPane.showMessageDialog(null,"USTED HA GANADO FELICIDADES"+"\n"+"SU PUNTAJE HA SIDO: "+puntaje);
+                    ventanaEmergente.estadoWin(puntaje);
                     puntajePantalla.setText(("PUNTAJE: "+puntaje));
                     jugador.agregarJugador(nombre, dificultad, puntaje);
+                    ventana.dispose();
                     Menu2 retorno = new Menu2();
-                    retorno.menu();
-                       
+                    boolean cerrar = ventanaEmergente.exit();
+                    
+                    
                 }
                     
                 }
@@ -227,11 +237,11 @@ public class Graficos extends JFrame {
    public void dibujarMinas(int dificultad){
        
        switch(dificultad){
-           case 1: cantidadMinas = 40;
+           case 1: cantidadMinas = 41;
            break;
-           case 2: cantidadMinas = 75;
+           case 2: cantidadMinas = 76;
            break;
-           case 3: cantidadMinas = 200;
+           case 3: cantidadMinas = 201;
            default:
                break;  
        }
@@ -261,7 +271,8 @@ public class Graficos extends JFrame {
            listaCuadros.get(it).setVisible(false);
            
            listaCuadros.set(it, sustituto);
-           lienzo.add(sustituto);
+           listaCuadros.get(it).setVisible(false);
+           lienzo.add(sustituto,0);
            
            lienzo.repaint(); 
        }
@@ -293,6 +304,7 @@ public class Graficos extends JFrame {
                              valor = true;
                              for(int min2: minas){
                                  listaBotones.get(min2).setVisible(false);
+                                 listaCuadros.get(min2).setVisible(true);
                              }
                          }
                      }
@@ -697,6 +709,7 @@ public class Graficos extends JFrame {
                  listaBotones.get(derecha).setText(null);
                  
                  listaCuadros.get(i2).setText(null);
+                 
                  listaBotones.get(izquierda).setVisible(false);
                  listaCuadros.get(izquierda).setVisible(true);
                  listaCuadros.get(arriba).setVisible(true);
@@ -775,7 +788,10 @@ public int puntajeTotal(){
     public static void setDificultad(String aDificultad) {
         dificultad = aDificultad;
     }
- 
- 
-       
+    
+    public void exit(){
+        //if(ex){
+                ventana.dispose();
+      //  }
+    }
 }

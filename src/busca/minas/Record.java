@@ -13,8 +13,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,11 +41,18 @@ public class Record {
     JButton facil;
     JButton medio;
     JButton demente;
+    JButton reset = new JButton();
     ArrayList<JButton> botonesLista = new ArrayList();
     int x=0;
     ArrayList<String> jugadoresFacil   = new ArrayList();
     ArrayList<String> jugadoresMedio   = new ArrayList();
     ArrayList<String> jugadoresDemente = new ArrayList();
+    
+    ArrayList<String> jugadoresFacilSort   = new ArrayList();
+    ArrayList<String> jugadoresMedioSort   = new ArrayList();
+    ArrayList<String> jugadoresDementeSort = new ArrayList();
+    
+    public static int parametro;
     
     public void records(){
        ventanaRecords = new JFrame("Buscaminas");
@@ -114,54 +125,81 @@ public class Record {
        botonesLista.add(demente);
        botonesLista.add(medio);
        botonesLista.add(facil);
+       
+       
         
        eventoClick();
-      
-//       for(JButton boton: botonesLista){
-//            boton.setBounds(220,(x+3)*60,120,50);
-//            boton.setVisible(true);
-//            panelRecord.add(boton,0);  
-//        }
        
-       //panelRecord.repaint();
-              
-        
+ 
  
     }
     public void eventoClick(){
         facil.addMouseListener(new MouseAdapter(){
           
            public void mousePressed(MouseEvent e){
-               
-              listado(0);
+               fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
+              parametro = 0; 
+              listado(parametro);
                for(JButton botones: botonesLista){
                    botones.setVisible(false);
                 
                }
+       //reset = new JButton();
+       reset.setText("REINICIAR");
+       reset.setSize(140, 40);
+       reset.setLocation(0, 518);
+       reset.setBackground(Color.red);
+       reset.setForeground(Color.BLACK);
+       reset.setVisible(true);
+       reset.setFont(new Font("Cooper Black",Font.BOLD,16));
+       reset.setVisible(true);
+       panelRecord.add(reset,0);
            }
            
        });
          medio.addMouseListener(new MouseAdapter(){
           
            public void mousePressed(MouseEvent e){
-               
-               listado(1);
+               fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
+               parametro = 1;
+               listado(parametro);
                for(JButton botones: botonesLista){
                    botones.setVisible(false);
                 
                }
+       //reset = new JButton();
+       reset.setText("REINICIAR");
+       reset.setSize(140, 40);
+       reset.setLocation(0, 518);
+       reset.setBackground(Color.red);
+       reset.setForeground(Color.BLACK);
+       reset.setVisible(true);
+       reset.setFont(new Font("Cooper Black",Font.BOLD,16));
+       reset.setVisible(true);
+       panelRecord.add(reset,0);
            }
            
        });
           demente.addMouseListener(new MouseAdapter(){
           
            public void mousePressed(MouseEvent e){
-               
-               listado(2);
+               fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
+               parametro =2;
+               listado(parametro);
                for(JButton botones: botonesLista){
                    botones.setVisible(false);
                 
                }
+       //reset = new JButton();
+       reset.setText("REINICIAR");
+       reset.setSize(140, 40);
+       reset.setLocation(0, 518);
+       reset.setBackground(Color.red);
+       reset.setForeground(Color.BLACK);
+       reset.setVisible(true);
+       reset.setFont(new Font("Cooper Black",Font.BOLD,16));
+       reset.setVisible(true);
+       panelRecord.add(reset,0);
            }
            
        });
@@ -180,30 +218,86 @@ public class Record {
            }
            
        });
+       
+        reset.addMouseListener(new MouseAdapter(){
+          
+           public void mousePressed(MouseEvent e){
+               File texto=null;
+               FileWriter fichero = null;
+            PrintWriter pw = null;
+            try{ 
+                fichero = new FileWriter("Records.txt");
+                pw = new PrintWriter(fichero);
+                
+                //int cantidad = jugadoresFacil.size()+jugadoresMedio.size()+jugadoresDemente.size();
+                pw.print(" , , "+"\n");
+                leerRecords();
+                System.out.println(parametro);
+                switch(parametro){
+                    case 0: jugadoresFacil.clear();
+                        break;
+                    case 1: jugadoresMedio.clear();
+                        break;
+                    case 2: jugadoresDemente.clear();
+                        break;
+                    default:
+                        break;
+                }
+                listado(parametro);
+                ventanaRecords.dispose();
+                Menu2 reback = new Menu2();
+                reback.menu();
+            }catch(FileNotFoundException ex){  
+            }catch(IOException er){
+                
+            }
+            finally {
+                try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero)
+                   fichero.close();
+                } catch (Exception e2) {
+                   e2.printStackTrace();
+                }
+             }
+               
+               
+               
+           }
+           
+       });
     }
     public void listado(int categoria){
         leerRecords();
         int longitud;
+        
         switch(categoria){
             
-            case 0: longitud = jugadoresFacil.size();
+            case 0: sort(jugadoresFacil,jugadoresFacilSort);
+                longitud = jugadoresFacilSort.size();
              listadoGanadores = new JLabel[longitud];
        for(int x=0; x<longitud; x++){
            listadoGanadores[x] = new JLabel();  
        }
        
         for(int x=0; x<longitud; x++){
-        listadoGanadores[x].setText(jugadoresFacil.get(x));
+          
+        listadoGanadores[x].setText(jugadoresFacilSort.get(x));
         listadoGanadores[x].setForeground(Color.black);
         listadoGanadores[x].setFont(new Font("Cooper Black",Font.BOLD,15));
         listadoGanadores[x].setHorizontalAlignment(SwingConstants.CENTER);
         listadoGanadores[x].setBounds(170,(x+4)*40,220,50);
         listadoGanadores[x].setVisible(true);
+          if(x==0){
+                listadoGanadores[0].setLocation(170, 150);
+            }
         panelRecord.add(listadoGanadores[x],0);
         }
        panelRecord.repaint();
                 break;
-            case 1: longitud = jugadoresMedio.size();
+            case 1: sort(jugadoresMedio,jugadoresMedioSort);
+                longitud = jugadoresMedioSort.size();
             listadoGanadores = new JLabel[longitud];
        for(int x=0; x<longitud; x++){
            listadoGanadores[x] = new JLabel();  
@@ -212,17 +306,21 @@ public class Record {
        
        
         for(int x=0; x<longitud; x++){
-        listadoGanadores[x].setText(jugadoresMedio.get(x));
+        listadoGanadores[x].setText(jugadoresMedioSort.get(x));
         listadoGanadores[x].setForeground(Color.black);
         listadoGanadores[x].setFont(new Font("Cooper Black",Font.BOLD,15));
         listadoGanadores[x].setHorizontalAlignment(SwingConstants.CENTER);
         listadoGanadores[x].setBounds(170,(x+4)*40,220,50);
         listadoGanadores[x].setVisible(true);
+        if(x==0){
+                listadoGanadores[0].setLocation(170, 150);
+            }
         panelRecord.add(listadoGanadores[x],0);
         }
        panelRecord.repaint();
                 break;
-            case 2: longitud = jugadoresDemente.size();
+            case 2: sort(jugadoresDemente,jugadoresDementeSort);
+                longitud = jugadoresDementeSort.size();
             listadoGanadores = new JLabel[longitud];
        for(int x=0; x<longitud; x++){
            listadoGanadores[x] = new JLabel();  
@@ -231,12 +329,15 @@ public class Record {
        
        
         for(int x=0; x<longitud; x++){
-        listadoGanadores[x].setText(jugadoresDemente.get(x));
+        listadoGanadores[x].setText(jugadoresDementeSort.get(x));
         listadoGanadores[x].setForeground(Color.black);
         listadoGanadores[x].setFont(new Font("Cooper Black",Font.BOLD,15));
         listadoGanadores[x].setHorizontalAlignment(SwingConstants.CENTER);
         listadoGanadores[x].setBounds(170,(x+4)*40,220,50);
         listadoGanadores[x].setVisible(true);
+        if(x==0){
+                listadoGanadores[0].setLocation(170, 150);
+            }
         panelRecord.add(listadoGanadores[x],0);
         }
         panelRecord.repaint();
@@ -261,29 +362,78 @@ public class Record {
             textoB = new BufferedReader(textoR);
             
             while((linea=textoB.readLine())!= null){
+               
                 System.out.println(linea);
                 String[] ln = linea.split(",");
-                
-                    System.out.println(ln[1]);
-                    
                 switch(ln[1]){
                     case "FÁCIL":
-                        jugadoresFacil.add(ln[0]+" record: "+ln[2]);
+                        jugadoresFacil.add(ln[0]+" -->: "+ln[2]);
+                        jugadoresFacilSort.add(null);
                         break;
                     case "MEDIO":
-                        jugadoresMedio.add(ln[0]+" record: "+ln[2]);
+                        jugadoresMedio.add(ln[0]+" -->: "+ln[2]);
+                        //jugadoresMedioSort.add(ln[0]+" -->: "+ln[2]);
+                        jugadoresMedioSort.add(null);
                         break;
                     case "DEMENTE":
-                        jugadoresDemente.add(ln[0]+" record: "+ln[2]);
+                        jugadoresDemente.add(ln[0]+" -->: "+ln[2]);
+                        //jugadoresDementeSort.add(ln[0]+" -->: "+ln[2]);
+                        jugadoresDementeSort.add(null);
                         break;
                     default:
                         break;
             }
-                    
+                
             }
+            
         }catch(IOException er){
             
         }
+    }
+    
+    public void sort(ArrayList<String> tipoJugadores,ArrayList<String> tipoJugadores2){
+        
+       
+        int[] valores = new int[tipoJugadores.size()];
+        
+      int x = 0;
+      for(String split: tipoJugadores){
+          String[] array = split.split(" -->: ");
+          valores[x] = Integer.parseInt(array[1]);
+          x++;
+      }  
+        
+        Arrays.sort(valores);
+            
+        int aux=0;
+        String[] valoresString = new String[valores.length];
+        //Pasar los puntajes a valores tipo String
+        for(int a=valores.length-1; a>=0; a--){
+            valoresString[aux] = Integer.toString(valores[a]);
+            aux++;
+        }
+        
+        if(valoresString.length>6){
+            for(int i=6; i<valoresString.length; i++){
+            valoresString[i] = null;
+        }
+            
+        }
+       
+        
+        for(String jugadores: tipoJugadores){
+            String[] punteo = jugadores.split(" -->: ");
+            
+            for(int posiciones=0; posiciones<valoresString.length; posiciones++){
+                if(punteo[1].equals(valoresString[posiciones])){
+                    if(tipoJugadores2.get(posiciones)==null){
+                    tipoJugadores2.set(posiciones, jugadores);
+                    break;
+                    }
+                } 
+            }
+        }       
+        
     }
     
 }
