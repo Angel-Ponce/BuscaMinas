@@ -14,8 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
+ *Clase Menu: esta clase se hizo para poder mostrar la primera pantalla con el boton Inicio.
  * @author Sergio Morán
+ * @author Angel Ponce
+ * @version 1.8
+ * 
  */
 public class Menu {
     
@@ -33,7 +36,9 @@ public class Menu {
     JPanel panelm;
     JLabel fondom;
 
-    
+    /***
+     * Metodo iniciar: aquí es donde se le dio la estructura a la ventana y se coloco en el centro el boton de inicio.
+     */
     public void iniciar(){
         
        ventana = new JFrame();
@@ -72,7 +77,11 @@ public class Menu {
        
        
        comenzar.addMouseListener(new MouseAdapter(){
-          
+          /***
+           * Metodo mousePressed: este metodo nos sirve para que all momento de hacer un click sobre el boton inicar nos muestre la siguiente pantalla.
+           * @param e 
+           * Recibe en parametro e el cual solo india que si se ha hecho un click sobre el boton.
+           */
            public void mousePressed(MouseEvent e){
                
                Menu2 ob = new Menu2();

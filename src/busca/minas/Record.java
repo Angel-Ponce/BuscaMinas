@@ -27,8 +27,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- *
- * @author atera
+ * Clase Record: en esta clase se encuentran todos los elementos que forman las ventanas de record en cada una de las diferentes dificultades.
+ * @author Sergio Morán
+ * @author Angel Ponce
  */
 public class Record {
     
@@ -53,7 +54,9 @@ public class Record {
     ArrayList<String> jugadoresDementeSort = new ArrayList();
     
     public static int parametro;
-    
+    /***
+     *Metodos records: Aqui se genera la ventana del record y los botones de las diferentes dificultades.
+     */
     public void records(){
        ventanaRecords = new JFrame("Buscaminas");
        ventanaRecords.setSize(558,586);
@@ -133,9 +136,16 @@ public class Record {
  
  
     }
+    /***
+     * Metodo eventoClick: aqui se hace el llamado a la acción que sucedera una vez se clica sobre cada boton
+     */
     public void eventoClick(){
         facil.addMouseListener(new MouseAdapter(){
-          
+          /***
+           * Metodo mousePressed: se indica las acciones a realizar al tocar el boton.
+           * @param e 
+           * Este parametro es el que indica cuando se a clicado sobre el boton.
+           */
            public void mousePressed(MouseEvent e){
                fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
               parametro = 0; 
@@ -158,7 +168,11 @@ public class Record {
            
        });
          medio.addMouseListener(new MouseAdapter(){
-          
+          /***
+           * Metodo mousePressed: se indica las acciones a realizar al tocar el boton.
+           * @param e
+           * Este parametro es el que indica cuando se a clicado sobre el boton.
+           */
            public void mousePressed(MouseEvent e){
                fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
                parametro = 1;
@@ -181,7 +195,11 @@ public class Record {
            
        });
           demente.addMouseListener(new MouseAdapter(){
-          
+          /***
+           * Metodo mousePressed: se indica las acciones a realizar al tocar el boton.
+           * @param e
+           * Este parametro es el que indica cuando se a clicado sobre el boton.
+           */
            public void mousePressed(MouseEvent e){
                fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
                parametro =2;
@@ -206,7 +224,11 @@ public class Record {
           
        
        regresar.addMouseListener(new MouseAdapter(){
-          
+          /***
+           * Metodo mousePressed: se indica las acciones a realizar al tocar el boton.
+           * @param e 
+           * Este parametro es el que indica cuando se a clicado sobre el boton.
+           */
            public void mousePressed(MouseEvent e){
                
                Menu2 ob = new Menu2();
@@ -220,7 +242,11 @@ public class Record {
        });
        
         reset.addMouseListener(new MouseAdapter(){
-          
+          /***
+           * Metodo mousePressed: se indica las acciones a realizar al tocar el boton.
+           * @param e 
+           * Este parametro es el que indica cuando se a clicado sobre el boton.
+           */
            public void mousePressed(MouseEvent e){
                File texto=null;
                FileWriter fichero = null;
@@ -268,6 +294,11 @@ public class Record {
            
        });
     }
+    /***
+     * Metodo listado: aqui se almacenan los nombres, dificultades y records de cada uno de los jugadores
+     * @param categoria 
+     * Recibe el parametro categorias para poder saber a que espacio mandarlo.
+     */
     public void listado(int categoria){
         leerRecords();
         int longitud;
@@ -350,7 +381,9 @@ public class Record {
         
     }
     
-    
+    /***
+     * Metodo leerRecords: en este metodo se ordenan a los jugadores dependiendo de la dificultad en la que hallan jugado.
+     */
     public void leerRecords(){
         File texto = null;
         FileReader textoR = null;
@@ -390,7 +423,13 @@ public class Record {
             
         }
     }
-    
+    /***
+     * Metodo sort: en este metodo se ardenan los jugadores por el punteo y la dificultad donde se encuentran.
+     * @param tipoJugadores
+     * Se recibe el parametro tipoJugadores para ser ordenados
+     * @param tipoJugadores2 
+     * Se recibe el parametro tipoJugadores2 para ser ordenandos
+     */
     public void sort(ArrayList<String> tipoJugadores,ArrayList<String> tipoJugadores2){
         
        

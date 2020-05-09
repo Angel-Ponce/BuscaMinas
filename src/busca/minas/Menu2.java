@@ -28,8 +28,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
+ * Clase Menu2: en esta clase se encuenta toda la estructura de la segunda pantalla, en la cual se encontraran los botones de las dificultades y el boton que nos dirige hacia la vantana de records
  * @author Sergio Morán
+ * @author Angel Ponce
+ * @version 1.8
  */
 public class Menu2 {
     
@@ -49,7 +51,9 @@ public class Menu2 {
     private static String dificultad;
     
     static public int punteo;
-    
+    /***
+     * Metodo Menu: aquí se colocaron todos los componentes que forman nuestra ventana.
+     */
     public void menu(){
         
         boton = new JButton[5];
@@ -127,13 +131,20 @@ public class Menu2 {
         eventosmenu();
         
     }
-    
+    /***
+     * Metodo eventosmenu: aquí se hace el llamado a las acciones del metodo mousePressed.
+     */
     public void eventosmenu(){
         Emergentes nombres = new Emergentes();
         Graficos jugador = new Graficos();
         boton[0].addMouseListener(new MouseAdapter(){
             
             @Override
+            /***
+             * MetodomousePressed: este metodo llama a las acciones del click cuando se presione sobre el boton "FÁCIL".
+             * @param e
+             * Recibe el parametro e el cual le indica que debe realizar la acción una vez se apriete el boton.
+             */
             public void mousePressed(MouseEvent e){
                 
             jugador.setDificultad("FÁCIL");
@@ -144,7 +155,11 @@ public class Menu2 {
         });
         
         boton[1].addMouseListener(new MouseAdapter(){
-            
+            /***
+             * MetodomousePressed: este metodo llama a las acciones del click cuando se presione sobre el boton "MEDIO".
+             * @param e 
+             * Recibe el parametro e el cual le indica que debe realizar la acción una vez se apriete el boton.
+             */
             public void mousePressed(MouseEvent e){
                 //Principal ob = new Principal(1);
              jugador.setDificultad("MEDIO");
@@ -157,7 +172,11 @@ public class Menu2 {
         });
         
         boton[2].addMouseListener(new MouseAdapter(){
-            
+            /***
+             * MetodomousePressed: este metodo llama a las acciones del click cuando se presione sobre el boton "DEMENTE".
+             * @param e 
+             * Recibe el parametro e el cual le indica que debe realizar la acción una vez se apriete el boton.
+             */
             public void mousePressed(MouseEvent e){
              jugador.setDificultad("DEMENTE");
             dificultad = "DEMENTE";
@@ -168,7 +187,11 @@ public class Menu2 {
         });
         
         boton[3].addMouseListener(new MouseAdapter(){
-            
+            /***
+             * MetodomousePressed: este metodo llama a la clase Menu. 
+             * @param e 
+             * Recibe el parametro e el cual le indica que debe realizar la acción una vez se apriete el boton.
+             */
             public void mousePressed(MouseEvent e){
                 
                 ventanam.dispose();
@@ -179,7 +202,11 @@ public class Menu2 {
         });
         
         boton[4].addMouseListener(new MouseAdapter(){
-            
+            /***
+             * MetodomousePressed: este metodo llama a la clase Record.
+             * @param e 
+             * Recibe el parametro e el cual le indica que debe realizar la acción una vez se apriete el boton.
+             */
            public void mousePressed(MouseEvent e){
            Record ob = new Record();
            ob.records();
@@ -190,11 +217,25 @@ public class Menu2 {
         
     }
     
-    
+    /***
+     * Metodo enviarPunteo: aqui se mandan los punteos a la clase Record.
+     * @param h 
+     * Recibe el parametro h el cual nos indica el punteo del jugador ingresado.
+     */
     public void  enviarPunteo(int h){
        punteo = h;
     }
-    
+    /***
+     * Metodo agregarJugador: aquí se le manda los nombres ingresados a un .txt para luego poder usarlos en la clase record.
+     * @param nombre
+     * Recibe el parametro nombre que nos indica el nombre del jugador ingresado.
+     * @param dificultad
+     * Recibe el parametro dificultad que nos indica la dificultad del jugador ingresado.
+     * @param score
+     * Recibe el parametro score que nos indica el score del jugador ingresado.
+     * @return 
+     * Retorna la variable nombre hacia la clase record.
+     */
     public String agregarJugador(String nombre, String dificultad, int score){
             FileWriter fichero = null;
             PrintWriter pw = null;
@@ -222,14 +263,18 @@ public class Menu2 {
             }
 
     /**
+     * Metodo getDificultad: aquí se toma la dificultad.
      * @return the dificultad
+     * Retorna la variable dificultad hacia la clase Record
      */
     public String getDificultad() {
         return dificultad;
     }
 
     /**
+     * Metodo set Dificultad: aqui se le modifica la dificultad a otra variable. 
      * @param dificultad the dificultad to set
+     * Recibe el parametro dificultad, para alamacenarlo en otra vareable.
      */
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
