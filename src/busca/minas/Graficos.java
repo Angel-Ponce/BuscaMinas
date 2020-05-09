@@ -29,7 +29,9 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 /***
- * 
+ * Clase Graficos: Esta clase extiende de JFrame, para así obtener sus métodos.
+ * En esta clase se almacena el corazón del juego, se inicializa la ventana de juego con todas sus propiedades.
+ * También se establecen todas las reglas y funcionamientos del juego.
  * @author Angel Ponce
  * @author Sergio Morán
  */
@@ -47,8 +49,6 @@ public class Graficos extends JFrame {
     private static String nombre;
     private static String dificultad;
     private static boolean boton;
-   
-    //Este metodo crea nuestra ventana con todas las propiedades ya listas
     /***
      * Metodo Crear Ventana: Este método crea la ventana de juego con todas las propiedades ya listas.
      */
@@ -80,6 +80,11 @@ public class Graficos extends JFrame {
         botonSalir.addMouseListener(new MouseAdapter(){
         
             @Override
+            /***
+             * Método mousePressed: Nos serivira para dar los eventos del click al botón "Salir" de la ventana de juego.
+             * Según el el retorno del método isBoton(); del objeto bot, el botón cerrara la ventana principal o regresará al menú de inicio.
+             * El retonro del método isBoton es booleano y si su valor es true, significa que el usuario ha perdido o ha ganado la partida.
+             */
             public void mousePressed(MouseEvent e){
                 Emergentes bot = new Emergentes();
                 ventana.dispose();
@@ -109,11 +114,7 @@ public class Graficos extends JFrame {
         bombita.setSize(25,25);
         bombita.setLocation(359, 532);
         lienzo.add(bombita);
-        
-        
-        
     }
-    //Este metodo crea una cuadricula de JLabels interna, aquí se dibujaran las bombas y los números
     /***
      * Método crearCuadricula: Este método nos crea una cuadricula de JLabels tal que sea la parte interna del juego, en donde
      * iran los números y las minas ocultas.
@@ -138,7 +139,11 @@ public class Graficos extends JFrame {
             }   
         } 
     }
-    //Este metodo crea una cuadricula de JButtons externa, es para la interfaz del juego.
+    /***
+     * Método crearBotones: El método que crea una cuadricula identica a la de Labels del método crearCuadricula();
+     * En lugar de ser Labels ahora son botones, para que el jugador pueda ir presionando la cuadricula. Esta nueva cuadricula esta repintada 
+     * sobre los Labels, de manera que los oculte.
+     */
     public void crearBotones(){
         for(int x=0; x<=500; x+=25){
             for(int y =0; y<=500; y+=25){
@@ -156,7 +161,10 @@ public class Graficos extends JFrame {
         eventoClick();
     }
    
-    //Con este metodo asignamos el evento clcik para todos los botones, asi sabremos cuando el usuario hace click sobre cualquiera de ellos.
+    /***
+     * Método eventoClick: Esté metodo asigna el evento click para todos los botones creados en el método crearBotones();
+     * a cada botón le da la propiedar correspondiente para que el juego funcione correctamente.
+     */
     public void eventoClick(){
         
         Menu2 jugador = new Menu2();
@@ -165,6 +173,10 @@ public class Graficos extends JFrame {
         for(JButton iterador: listaBotones){
             MouseListener click = new MouseListener() {
                 @Override
+                /***
+                 * Evento mouseClicked: Se sobre escriben los métodos del MouseListener para todos los botones.
+                 * (Solo se utiliza el método mosueClicked).
+                 */
                 public void mouseClicked(MouseEvent me) {
                     
                      boolean valor;
@@ -180,74 +192,56 @@ public class Graficos extends JFrame {
                          puntajePantalla.setText(("PUNTAJE: "+puntaje));
                      }else{
                         puntaje+=puntajeTotal();
-                        //ventana.dispose();
-                        //JOptionPane.showMessageDialog(null,"USTED HA PERDIDO"+"\n"+"SU PUNTAJE HA SIDO: "+puntaje);
-                        //ventana.setVisible(false);
                         puntajePantalla.setText(("PUNTAJE: "+puntaje));
                         jugador.agregarJugador(nombre, dificultad, puntaje);
                         Menu2 retorno = new Menu2();
                         boolean cerrar = ventanaEmergente.exit();
                         ventanaEmergente.estadoLose(puntaje);
-                        
-                        //ventana.dispose();
-                        
-                        //retorno.menu();
                      }
                   
                    if(algoritmoWin()==cantidadMinas){
                     puntaje+=puntajeTotal();
-                    //JOptionPane.showMessageDialog(null,"USTED HA GANADO FELICIDADES"+"\n"+"SU PUNTAJE HA SIDO: "+puntaje);
                     ventanaEmergente.estadoWin(puntaje);
                     puntajePantalla.setText(("PUNTAJE: "+puntaje));
                     jugador.agregarJugador(nombre, dificultad, puntaje);
                     ventana.dispose();
                     Menu2 retorno = new Menu2();
                     boolean cerrar = ventanaEmergente.exit();
-                    
-                    
                 }
-                    
                 }
-
                 @Override
                 public void mousePressed(MouseEvent me) {
-
                 }
-
                 @Override
                 public void mouseReleased(MouseEvent me) {
-
                 }
-
                 @Override
                 public void mouseEntered(MouseEvent me) {
-
+                    System.out.println("GraphsPetén");
                 }
-
                 @Override
                 public void mouseExited(MouseEvent me) {
-
                 }
             };
             
             iterador.addMouseListener(click);
         }
-      
     }
     
     //----------------------------------------------------MECANICA DE MINAS----------------------------------------------------------//
-    //Este array contiene las posiciones exactas de minas en el array de labels
     protected int[] minas;
     protected Random random = new Random();
     protected int cantidadMinas;
     protected static int pos;
     protected boolean posR;
-
     String ruta = System.getProperty("user.dir");
-    String rutat = "\""+ruta+"\""; 
-   
-   //Con este metodo dibujaremos las minas aleatoriamente en la cuadricula (los valores no se repiten)
-    //y lo haremos dependiendo la dificultad que el jugador eliga.
+    String rutat = "\""+ruta+"\"";
+  /***
+   * Método dibujarMinas: El método reemplaza los labeles de texto por labeles de imagén que contienen una bomba.
+   * Las posiciones que elige para el intercambio están dadas por números aleatorios entre 0 y 440.
+   * @param dificultad 
+   * El parámetro difiultad le indica al método cuantas minas dibujar en la cuadricula.
+   */
    public void dibujarMinas(int dificultad){
        
        switch(dificultad){
@@ -291,7 +285,10 @@ public class Graficos extends JFrame {
            lienzo.repaint(); 
        }
    }
-   //El motodo para que la posicion de las minas no se repitan.
+   /***
+    * Método buscarMinasREpetidas: Este método es de gran útilidad ya que establece que ninguna mina quede en lugares repetidos
+    * lo que asegura que se dibujen todas las minas.
+    */
    public void buscarMinasRepetidas(){
        boolean valor = false;
        while(valor==false){
@@ -307,18 +304,21 @@ public class Graficos extends JFrame {
         }
        }
    }
-   
-   //Este metodo es utilizado por el evento click y lo que hace es que si el usuario apacha la posicion de una mina
-   //Automaticamente aparecen todas las demas.
-   //Recibe el parametro "pos" porque en ese parametro ira la posicion donde se origino el click
+   /***
+    * Método encontrarMinas: Este método es llamado por el evento click de todos los botones, lo que hace es que dependiendo de la úbicacion 
+    * en donde se generó un click busca y determina si existe una mina o no.
+    * @param pos
+    * El parámetro pos sirve para saber en que posicion se genero el click y para ver si en esa posición hay una mina o no.
+    * @return
+    * El retorno de este método es booleano, y si encuentra que la posición donde se generó el click es una mina retorna el valor: true, en caso 
+    * contrario retorna el valor: false.
+    */
    public boolean encontrarMinas(int pos){
        boolean valor = false;
         for(int min: minas){
                          if(pos==min){
                              valor = true;
                              for(JButton min2: listaBotones){
-                                 //listaBotones.get(min2).setVisible(false);
-                                 //listaCuadros.get(min2).setVisible(true);
                                  min2.setVisible(false);
                                  listaCuadros.get(listaBotones.indexOf(min2)).setVisible(true);
                              }
@@ -326,10 +326,6 @@ public class Graficos extends JFrame {
                      }
       return valor;
    }
-   //El algoritmo cruz es uno de los mas importantes
-   //Lo que hará es estudiar las posiciones en cruz de un botón centrico
-   //Encontrará si en esas posiciones hay minas y de ser así las contara.
-   //retornara la cantidad de minas que encuentra
    /***
     * Método algoritmoCruz: Este metodo estudia las posiciones en cruz de un cuadro donde se genere un click y revisa si hay minas en esas posiciones.
     * @param i2
@@ -349,6 +345,17 @@ public class Graficos extends JFrame {
    
    //El algoritmo trifuersa, es la base fundamental del juego.
    //Aquí es donde se implementa el algoritmo cruz hacia todos los botones.
+   /***
+    * Método trifuersa: El algoritmo trifuersa es el más importante de todos, aquí es donde yace la base fundamental del juego.
+    * Este algoritmo establecera las posiciones "Arriba", "Abajo", "Izquierda" y "Derecha" al rededor de un botón (en donde se genera el click).
+    * A partir de estas posiciones hace llamado del método trifuersa(); para saber si hay minas en esas posiciones.
+    * Si encuentra una cantidad de minas mayor a 0 manda impresión de la cantidad de minas encontradas en el label úbicado debajo del botón donde se generó el click.
+    * Si encuentra que la cantidad de minas es igual a 0 se vuelve recursivo y dentro de el mismo hace llamado al método trifuersa() para proceder con el mismo procedimiento
+    * pero con las posciciones "Arriba", "Abajo", "Izquierda" y "Derecha", es decir, ahora buscará minas al rededor de 4 botones.
+    * Además, si la cantidad de minas al rededor (cruz) de un botón es 0, el algoritmo le regalará esas posiciones al jugador, para ahorrarle clicks inncesarios.
+    * Todo acaba justo cuando el algoritmo detecta que hay al menos una mina.
+    * @param i2 
+    */
    public void trifuersa(int i2){
        int arriba;
        int abajo;
@@ -761,7 +768,12 @@ public class Graficos extends JFrame {
              }//Fin cuadricula central
      }
   }
-   
+/***
+ * Método algoritmoWin: Este método estudia todas las posiciones de los botones, este método es llamado por el evento click de los botones.
+ * @return
+ * Si el método irá sumando todas las posiciones de botones restantes por precionar, el método en cada click retorna está cantidad,
+ * si se detecta que la cantidad de botones restantes por precionar es la misma cantidad de minas existentes se establece que el jugador ganó la partida.
+ */   
  public int algoritmoWin(){
      int suma = 0;
         
@@ -773,6 +785,12 @@ public class Graficos extends JFrame {
             }
      return suma;       
  }
+/***
+ * Método puntajeTotal: esté método irá sumando la cantidad de clicks hechos por el usuario, incluyendo los que el algoritmo trifuersa() regala.
+ * @return 
+ * El retorno es la cantidad que el jugador lleva, sirve para imprimirlo en la ventana de juego.
+ * También sirve para enviar ese punteo a la lista de records.
+ */
 public int puntajeTotal(){
     int suma = 0;
     for(JButton botones: listaBotones){
@@ -782,52 +800,63 @@ public int puntajeTotal(){
         }
     }
     return suma;
-} 
-
-    /**
-     * @return the nombre
-     */
+}
+/***
+ * Método getNombre:Sirve para obtener el nombre del jugador, en cualquier clase del proyecto.
+ * @return 
+ * retorna el valor del nombre.
+ */
     public static String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param aNombre the nombre to set
-     */
+ /***
+  * Método setNombre: Es útilizado por la clase "Emergentes" y envía un cambio de nombre.
+  * @param aNombre 
+  * Recibe el parámetro aNombre, para hacer el cambio de atributo.
+  */
     public static void setNombre(String aNombre) {
         nombre = aNombre;
     }
 
-    /**
-     * @return the dificultad
-     */
+/***
+ * Método getDificultad: Es utlizado por obras clases para obtener la dificultad elegida por el jugador.
+ * @return 
+ */
     public static String getDificultad() {
         return dificultad;
     }
 
-    /**
-     * @param aDificultad the dificultad to set
-     */
+/***
+ * Método setDificultado: Es utilizado por la clase "Emergentes" y envía el cambio de dificultad.
+ * @param aDificultad 
+ * El parámetro aDificultad sirve para hacer el cambio de atributo.
+ */
     public static void setDificultad(String aDificultad) {
         dificultad = aDificultad;
     }
-    
+/***
+ * Método exit: Es utilizado por la clase "Emergentes" y lo que indica es el cierre de la ventana de juego.
+ * Se utiliza cuando el jugador ya perdió o ganó.
+ */
     public void exit(){
-        //if(ex){
                 ventana.dispose();
-      //  }
     }
 
-    /**
-     * @return the boton
-     */
+/***
+ * Método isBoton: Este método sirve para obtener el valor de la variable boton, utilizada por el botón "Salir" de la ventana de juego.
+ * @return 
+ * Retorna el valor de la variable boton.
+ */
     public static boolean isBoton() {
         return boton;
     }
 
-    /**
-     * @param aBoton the boton to set
-     */
+/***
+ * Método setBoton: Es utilizado por la clase "Emergentes" y le indica al boton "Salir" si puede o no puede efectuar el método de regresar al menú de inicio.
+ * @param aBoton 
+ * Recibe el parámetro aBoton para que la clase "Emergentes" envíe True o False.
+ */
     public static void setBoton(boolean aBoton) {
         boton = aBoton;
     }

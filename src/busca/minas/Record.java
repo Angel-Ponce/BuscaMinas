@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package busca.minas;
 
 import java.awt.Color;
@@ -426,9 +421,9 @@ public class Record {
     /***
      * Metodo sort: en este metodo se ardenan los jugadores por el punteo y la dificultad donde se encuentran.
      * @param tipoJugadores
-     * Se recibe el parametro tipoJugadores para ser ordenados
+     * Se recibe el parametro tipoJugadores para saber en que categoría se jugo.
      * @param tipoJugadores2 
-     * Se recibe el parametro tipoJugadores2 para ser ordenandos
+     * Se recibe el parametro tipoJugadores2 para remplazar la categoría pero ya ordenada.
      */
     public void sort(ArrayList<String> tipoJugadores,ArrayList<String> tipoJugadores2){
         

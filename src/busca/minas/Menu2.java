@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package busca.minas;
 
 import java.awt.Color;
@@ -31,7 +26,6 @@ import javax.swing.JPanel;
  * Clase Menu2: en esta clase se encuenta toda la estructura de la segunda pantalla, en la cual se encontraran los botones de las dificultades y el boton que nos dirige hacia la vantana de records
  * @author Sergio Morán
  * @author Angel Ponce
- * @version 1.8
  */
 public class Menu2 {
     
