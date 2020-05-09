@@ -37,13 +37,13 @@ public class Emergentes extends JFrame{
     int ancho = 400;
     static boolean  scape = false;
     String nombre;
-    
+    private static boolean boton=false;
     
     public void estadoWin(int punteo){
-        
+        setBoton(true);
         ventanaEmergente = new JFrame();
-        //ventanaEmergente.setLocationRelativeTo(null);
-        ventanaEmergente.setLocation(440, 450);
+        ventanaEmergente.setLocationRelativeTo(null);
+        //ventanaEmergente.setLocation(440, 450);
         ventanaEmergente.setTitle("BUSCAMINAS");
         ventanaEmergente.setLayout(null);
         ventanaEmergente.setSize(ancho,alto);
@@ -86,10 +86,10 @@ public class Emergentes extends JFrame{
         lienzoEmergente.repaint();
     }
     public void estadoLose(int punteo){
-        
+        setBoton(true);
         ventanaEmergente = new JFrame();
-        //ventanaEmergente.setLocationRelativeTo(null);
-        ventanaEmergente.setLocation(440, 450);
+        ventanaEmergente.setLocationRelativeTo(null);
+        //ventanaEmergente.setLocation(440, 450);
         ventanaEmergente.setTitle("BUSCAMINAS");
         ventanaEmergente.setLayout(null);
         ventanaEmergente.setSize(ancho,alto);
@@ -138,8 +138,8 @@ public class Emergentes extends JFrame{
     
     public void pedirNombre(int cantidadMinas){
         ventanaEmergente = new JFrame();
-        //ventanaEmergente.setLocationRelativeTo(null);
-        ventanaEmergente.setLocation(440, 450);
+        ventanaEmergente.setLocationRelativeTo(null);
+        //ventanaEmergente.setLocation(440, 450);
         ventanaEmergente.setTitle("BUSCAMINAS");
         ventanaEmergente.setLayout(null);
         ventanaEmergente.setSize(ancho,alto);
@@ -251,22 +251,27 @@ public class Emergentes extends JFrame{
          aceptarEmergente.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){
+                setBoton(false);
                 scape=true;
                 ventanaEmergente.dispose();
                 Graficos fuera =  new Graficos();
                 fuera.exit();
+                fuera.setBoton(isBoton());
                 Menu2 salir = new Menu2();
                 salir.menu();
+                
             }
         });
          
          ventanaEmergente.addWindowListener(new WindowAdapter(){
              @Override
              public void windowClosing(WindowEvent e){
+                setBoton(false);
                 scape = true;
                 ventanaEmergente.dispose();
                 Graficos fuera =  new Graficos();
                 fuera.exit();
+                fuera.setBoton(isBoton());
                 Menu2 salir = new Menu2();
                 salir.menu(); 
              }
@@ -286,6 +291,20 @@ public class Emergentes extends JFrame{
     public String name(){
         System.out.println(areaNombre.getText());
         return areaNombre.getText();
+    }
+
+    /**
+     * @return the boton
+     */
+    public static boolean isBoton() {
+        return boton;
+    }
+
+    /**
+     * @param aBoton the boton to set
+     */
+    public static void setBoton(boolean aBoton) {
+        boton = aBoton;
     }
 }
 

@@ -28,10 +28,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-//import javax.swing.JPanel;
-/**
- *
- * @author angelponce
+/***
+ * 
+ * @author Angel Ponce
+ * @author Sergio Morán
  */
 public class Graficos extends JFrame {
     //Creamos una lista para almacenar todos los elementos del juego.
@@ -46,9 +46,13 @@ public class Graficos extends JFrame {
     protected JLabel bombita;
     private static String nombre;
     private static String dificultad;
+    private static boolean boton;
    
     //Este metodo crea nuestra ventana con todas las propiedades ya listas
-    public void crearVentana(){
+    /***
+     * Metodo Crear Ventana: Este método crea la ventana de juego con todas las propiedades ya listas.
+     */
+    public void crearVentana(){ 
         ventana = new JFrame();
         ventana.setSize(530,593);
         ventana.setLocationRelativeTo(null);
@@ -72,14 +76,20 @@ public class Graficos extends JFrame {
         botonSalir.setBackground(Color.RED);
         botonSalir.setFont(new Font("Cooper Black",Font.BOLD,16));
         botonSalir.setVisible(true);
-        
+         boton = false;
         botonSalir.addMouseListener(new MouseAdapter(){
         
             @Override
             public void mousePressed(MouseEvent e){
+                Emergentes bot = new Emergentes();
                 ventana.dispose();
+                System.out.println(boton);
+                if(bot.isBoton()==false){
                 Menu2 salir = new Menu2();
                 salir.menu();
+                }else{
+                    ventana.dispose();
+                }
             }
         });
         lienzo.add(botonSalir);
@@ -104,6 +114,10 @@ public class Graficos extends JFrame {
         
     }
     //Este metodo crea una cuadricula de JLabels interna, aquí se dibujaran las bombas y los números
+    /***
+     * Método crearCuadricula: Este método nos crea una cuadricula de JLabels tal que sea la parte interna del juego, en donde
+     * iran los números y las minas ocultas.
+     */
     public void crearCuadricula(){
         for(int x=0; x<=500; x+=25){
             for(int y=0; y<=500; y+=25){ 
@@ -302,9 +316,11 @@ public class Graficos extends JFrame {
         for(int min: minas){
                          if(pos==min){
                              valor = true;
-                             for(int min2: minas){
-                                 listaBotones.get(min2).setVisible(false);
-                                 listaCuadros.get(min2).setVisible(true);
+                             for(JButton min2: listaBotones){
+                                 //listaBotones.get(min2).setVisible(false);
+                                 //listaCuadros.get(min2).setVisible(true);
+                                 min2.setVisible(false);
+                                 listaCuadros.get(listaBotones.indexOf(min2)).setVisible(true);
                              }
                          }
                      }
@@ -314,6 +330,13 @@ public class Graficos extends JFrame {
    //Lo que hará es estudiar las posiciones en cruz de un botón centrico
    //Encontrará si en esas posiciones hay minas y de ser así las contara.
    //retornara la cantidad de minas que encuentra
+   /***
+    * Método algoritmoCruz: Este metodo estudia las posiciones en cruz de un cuadro donde se genere un click y revisa si hay minas en esas posiciones.
+    * @param i2
+    * parametro es la posiocion en la cuadricula donde se genera click.
+    * @return 
+    * es un valor correspondiente a la cantidad de minas al rededor de donde se origino el click
+    */
    public int algoritmoCruz(int i2){
        int contador = 0;
        for(int min: minas){
@@ -793,5 +816,19 @@ public int puntajeTotal(){
         //if(ex){
                 ventana.dispose();
       //  }
+    }
+
+    /**
+     * @return the boton
+     */
+    public static boolean isBoton() {
+        return boton;
+    }
+
+    /**
+     * @param aBoton the boton to set
+     */
+    public static void setBoton(boolean aBoton) {
+        boton = aBoton;
     }
 }
