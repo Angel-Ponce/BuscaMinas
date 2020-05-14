@@ -43,6 +43,7 @@ public class Menu {
        ventana.setSize(558,586);
        ventana.setLayout(null);
        ventana.setLocationRelativeTo(null);
+       ventana.setTitle("BUSCAMINAS");
        ventana.setResizable(false);
        ventana.setVisible(true);
        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,8 +65,8 @@ public class Menu {
        
        comenzar = new JButton("Inicio");
        comenzar.setBounds(220, 230, 120, 50);
-       comenzar.setForeground(Color.black);
-       comenzar.setBackground(Color.red);
+       comenzar.setForeground(Color.BLACK);
+       comenzar.setBackground(Color.RED);
        comenzar.setFont(new Font("Cooper Black",Font.BOLD,16));
        comenzar.setVisible(true);
        panel.add(comenzar,0);

@@ -57,7 +57,7 @@ public class Menu2 {
        }
         
        ventanam = new JFrame();
-       ventanam = new JFrame("Buscaminas");
+       ventanam = new JFrame("BUSCAMINAS");
        ventanam.setSize(558,586);
        ventanam.setLayout(null);
        ventanam.setLocationRelativeTo(null);
@@ -72,7 +72,7 @@ public class Menu2 {
         panelm.setVisible(true);
         ventanam.add(panelm);
         
-       fondom = new JLabel(new ImageIcon("Buscaminas.png"));
+       fondom = new JLabel(new ImageIcon("Buscaminas2.png"));
        fondom.setSize(558,558);
        fondom.setOpaque(true);
        fondom.setVisible(true);
@@ -84,16 +84,16 @@ public class Menu2 {
         boton[1].setText("MEDIO");
         boton[2].setText("DEMENTE");
         
-       boton[0].setForeground(Color.black);
-       boton[0].setBackground(Color.cyan);
+       boton[0].setForeground(Color.BLACK);
+       boton[0].setBackground(new Color(250,85,85));
        boton[0].setFont(new Font("Cooper Black",Font.BOLD,16));
        
-       boton[1].setForeground(Color.black);
-       boton[1].setBackground(Color.yellow);
+       boton[1].setForeground(Color.BLACK);
+       boton[1].setBackground(new Color(250,50,50));
        boton[1].setFont(new Font("Cooper Black",Font.BOLD,16));
        
-       boton[2].setForeground(Color.black);
-       boton[2].setBackground(Color.green);
+       boton[2].setForeground(Color.BLACK);
+       boton[2].setBackground(Color.RED);
        boton[2].setFont(new Font("Cooper Black",Font.BOLD,15));
        
         boton[3].setText("REGRESAR");

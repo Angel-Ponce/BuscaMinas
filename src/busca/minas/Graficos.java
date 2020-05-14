@@ -128,7 +128,7 @@ public class Graficos extends JFrame {
                 nuevoCuadro.setBackground(Color.gray);
                 nuevoCuadro.setOpaque(true);
                 nuevoCuadro.setText(" ");
-                nuevoCuadro.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1)); //EN PRUEBA
+                nuevoCuadro.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
                 nuevoCuadro.setFont(new Font("Times New Roman",Font.BOLD,12));
                 nuevoCuadro.setHorizontalAlignment(SwingConstants.CENTER);
                 nuevoCuadro.setVisible(false);   
@@ -201,10 +201,10 @@ public class Graficos extends JFrame {
                   
                    if(algoritmoWin()==cantidadMinas){
                     puntaje+=puntajeTotal();
-                    ventanaEmergente.estadoWin(puntaje);
                     puntajePantalla.setText(("PUNTAJE: "+puntaje));
                     jugador.agregarJugador(nombre, dificultad, puntaje);
-                    ventana.dispose();
+                    //ventana.dispose();
+                    ventanaEmergente.estadoWin(puntaje);
                     Menu2 retorno = new Menu2();
                     boolean cerrar = ventanaEmergente.exit();
                 }
@@ -217,7 +217,7 @@ public class Graficos extends JFrame {
                 }
                 @Override
                 public void mouseEntered(MouseEvent me) {
-                    System.out.println("GraphsPetén");
+                    //System.out.println("GraphsPetén");
                 }
                 @Override
                 public void mouseExited(MouseEvent me) {
@@ -321,6 +321,12 @@ public class Graficos extends JFrame {
                              for(JButton min2: listaBotones){
                                  min2.setVisible(false);
                                  listaCuadros.get(listaBotones.indexOf(min2)).setVisible(true);
+                             }
+                             for(JLabel min3: listaCuadros){
+                                 if(min3.getText()==" "){
+                                     min3.setBackground(Color.DARK_GRAY);
+                                     min3.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
+                                 }
                              }
                          }
                      }

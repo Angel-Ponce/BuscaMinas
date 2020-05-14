@@ -53,7 +53,7 @@ public class Record {
      *Metodos records: Aqui se genera la ventana del record y los botones de las diferentes dificultades.
      */
     public void records(){
-       ventanaRecords = new JFrame("Buscaminas");
+       ventanaRecords = new JFrame("BUSCAMINAS");
        ventanaRecords.setSize(558,586);
        ventanaRecords.setLayout(null);
        ventanaRecords.setLocationRelativeTo(null);
@@ -67,7 +67,7 @@ public class Record {
        panelRecord.setVisible(true);
        ventanaRecords.add(panelRecord);
        
-       fondoRecord = new JLabel(new ImageIcon("Buscaminas.png"));
+       fondoRecord = new JLabel(new ImageIcon("Dificultad.png"));
        fondoRecord.setSize(558,558);
        fondoRecord.setOpaque(true);
        fondoRecord.setVisible(true);
@@ -97,14 +97,14 @@ public class Record {
        demente.setText("DEMENTE");
         
        facil.setForeground(Color.black);
-       facil.setBackground(Color.cyan);
+       facil.setBackground(new Color(255,255,100));
        facil.setFont(new Font("Cooper Black",Font.BOLD,16));
        facil.setVisible(true);
        facil.setBounds(218,180,120,50);
        panelRecord.add(facil,0);
        
        medio.setForeground(Color.black);
-       medio.setBackground(Color.yellow);
+       medio.setBackground(new Color(255,255,60));
        medio.setFont(new Font("Cooper Black",Font.BOLD,16));
        medio.setVisible(true);
        medio.setBounds(218,240,120,50);
@@ -112,7 +112,7 @@ public class Record {
       
        
        demente.setForeground(Color.black);
-       demente.setBackground(Color.green);
+       demente.setBackground(Color.YELLOW);
        demente.setFont(new Font("Cooper Black",Font.BOLD,15));
        demente.setVisible(true);
        demente.setBounds(218,300,120,50);
@@ -123,13 +123,7 @@ public class Record {
        botonesLista.add(demente);
        botonesLista.add(medio);
        botonesLista.add(facil);
-       
-       
-        
        eventoClick();
-       
- 
- 
     }
     /***
      * Metodo eventoClick: aqui se hace el llamado a la acción que sucedera una vez se clica sobre cada boton
@@ -310,7 +304,7 @@ public class Record {
         for(int x=0; x<longitud; x++){
           
         listadoGanadores[x].setText(jugadoresFacilSort.get(x));
-        listadoGanadores[x].setForeground(Color.black);
+        listadoGanadores[x].setForeground(Color.BLACK);
         listadoGanadores[x].setFont(new Font("Cooper Black",Font.BOLD,15));
         listadoGanadores[x].setHorizontalAlignment(SwingConstants.CENTER);
         listadoGanadores[x].setBounds(170,(x+4)*40,220,50);

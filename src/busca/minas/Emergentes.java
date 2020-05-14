@@ -84,6 +84,7 @@ public class Emergentes extends JFrame{
         aceptarEmergente.setText("ACEPTAR");
         aceptarEmergente.setFont(new Font("Cooper Black",Font.BOLD,14));
         aceptarEmergente.setHorizontalAlignment(SwingConstants.CENTER);
+        aceptarEmergente.setForeground(Color.BLACK);
         aceptarEmergente.setBounds(280,130,120,50);
         aceptarEmergente.setBackground(Color.red);
         lienzoEmergente.add(aceptarEmergente,0);
@@ -137,6 +138,7 @@ public class Emergentes extends JFrame{
         aceptarEmergente.setFont(new Font("Cooper Black",Font.BOLD,14));
         aceptarEmergente.setHorizontalAlignment(SwingConstants.CENTER);
         aceptarEmergente.setBounds(280,130,120,50);
+        aceptarEmergente.setForeground(Color.BLACK);
         aceptarEmergente.setBackground(Color.red);
         lienzoEmergente.add(aceptarEmergente,0);
         
@@ -191,6 +193,7 @@ public class Emergentes extends JFrame{
         aceptarEmergente.setFont(new Font("Cooper Black",Font.BOLD,14));
         aceptarEmergente.setHorizontalAlignment(SwingConstants.CENTER);
         aceptarEmergente.setBounds(280,130,120,50);
+        aceptarEmergente.setForeground(Color.BLACK);
         aceptarEmergente.setBackground(Color.red);
         lienzoEmergente.add(aceptarEmergente,0);
         
