@@ -49,6 +49,8 @@ public class Graficos extends JFrame {
     private static String nombre;
     private static String dificultad;
     private static boolean boton;
+    final private ImageIcon bomba = new ImageIcon(getClass().getResource("/resources/Bomba.png"));
+    final private ImageIcon iconV = new ImageIcon(getClass().getResource("/resources/icon.png"));
     /***
      * Metodo Crear Ventana: Este método crea la ventana de juego con todas las propiedades ya listas.
      */
@@ -58,8 +60,10 @@ public class Graficos extends JFrame {
         ventana.setLocationRelativeTo(null);
         ventana.setTitle("BUSCAMINAS");
         ventana.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        ventana.setResizable(false); 
+        ventana.setResizable(false);
         ventana.setVisible(true);  
+        ventana.setIconImage(iconV.getImage());
+        
         lienzo = new JPanel();
         lienzo.setSize(530,565);
         lienzo.setLocation(0, 0);
@@ -109,7 +113,7 @@ public class Graficos extends JFrame {
         puntajePantalla.setOpaque(true);
         lienzo.add(puntajePantalla);
         
-        bombita = new JLabel(new ImageIcon("Bomba.png"));
+        bombita = new JLabel(bomba);
         bombita.setVisible(true);
         bombita.setSize(25,25);
         bombita.setLocation(359, 532);
@@ -269,7 +273,7 @@ public class Graficos extends JFrame {
        //Se coloca y se guarda en la posicion exacta en el lienzo y en la lista de Labels
        for(int it: minas){
            
-           JLabel sustituto = new JLabel(new ImageIcon("Bomba.png"));
+           JLabel sustituto = new JLabel(bomba);
            sustituto.setSize(25,25);
            
            int posx = listaCuadros.get(it).getLocation().x;

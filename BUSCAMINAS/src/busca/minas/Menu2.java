@@ -43,8 +43,10 @@ public class Menu2 {
     JPanel panelm;
     JLabel fondom;
     private static String dificultad;
-    
     static public int punteo;
+    
+    final private ImageIcon buscaminas2 = new ImageIcon(getClass().getResource("/resources/Buscaminas2.png"));
+    final private ImageIcon iconV = new ImageIcon(getClass().getResource("/resources/icon.png"));
     /***
      * Metodo Menu: aquí se colocaron todos los componentes que forman nuestra ventana.
      */
@@ -64,6 +66,7 @@ public class Menu2 {
        ventanam.setResizable(false);
        ventanam.setVisible(true);
        ventanam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       ventanam.setIconImage(iconV.getImage());
         
         //panel.setVisible(true);
         panelm = new JPanel();
@@ -72,7 +75,7 @@ public class Menu2 {
         panelm.setVisible(true);
         ventanam.add(panelm);
         
-       fondom = new JLabel(new ImageIcon("Buscaminas2.png"));
+       fondom = new JLabel(buscaminas2);
        fondom.setSize(558,558);
        fondom.setOpaque(true);
        fondom.setVisible(true);

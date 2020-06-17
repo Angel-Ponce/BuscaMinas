@@ -39,6 +39,11 @@ public class Emergentes extends JFrame{
     static boolean  scape = false;
     String nombre;
     private static boolean boton=false;
+    final private ImageIcon trofeo = new ImageIcon(getClass().getResource("/resources/Trofeo.png"));
+    final private ImageIcon explosion = new ImageIcon(getClass().getResource("/resources/explosion.png"));
+    final private ImageIcon user = new ImageIcon(getClass().getResource("/resources/user.png"));
+    final private ImageIcon iconV = new ImageIcon(getClass().getResource("/resources/icon.png"));
+
     /***
      * Método estadoWin: Este método crea una ventana pequeña que tiene propiedades gráficas especiales.
      * Es utilizado para indicarle a un jugador que ganó su juego e indicarle su puntuación total.
@@ -56,6 +61,7 @@ public class Emergentes extends JFrame{
         ventanaEmergente.setVisible(true);
         //ventanaEmergente.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ventanaEmergente.setResizable(false);
+        ventanaEmergente.setIconImage(iconV.getImage());
         
         lienzoEmergente = new JPanel();
         lienzoEmergente.setLayout(null);
@@ -65,7 +71,8 @@ public class Emergentes extends JFrame{
         lienzoEmergente.setVisible(true);
         ventanaEmergente.add(lienzoEmergente,0);
         
-        fondoEmergente = new  JLabel(new ImageIcon("Trofeo.png"));
+        
+        fondoEmergente = new  JLabel(trofeo);
         fondoEmergente.setSize(128, 128);
         fondoEmergente.setVisible(true);
         fondoEmergente.setLocation(0,50);
@@ -109,6 +116,7 @@ public class Emergentes extends JFrame{
         ventanaEmergente.setVisible(true);
         //ventanaEmergente.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ventanaEmergente.setResizable(false);
+        ventanaEmergente.setIconImage(iconV.getImage());
         
         lienzoEmergente = new JPanel();
         lienzoEmergente.setLayout(null);
@@ -118,7 +126,7 @@ public class Emergentes extends JFrame{
         lienzoEmergente.setVisible(true);
         ventanaEmergente.add(lienzoEmergente,0);
         
-        fondoEmergente = new  JLabel(new ImageIcon("explosion.png"));
+        fondoEmergente = new  JLabel(explosion);
         fondoEmergente.setSize(128, 128);
         fondoEmergente.setVisible(true);
         fondoEmergente.setLocation(0,30);
@@ -164,6 +172,7 @@ public class Emergentes extends JFrame{
         ventanaEmergente.setVisible(true);
         //ventanaEmergente.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ventanaEmergente.setResizable(false);
+        ventanaEmergente.setIconImage(iconV.getImage());
         
         lienzoEmergente = new JPanel();
         lienzoEmergente.setLayout(null);
@@ -173,7 +182,7 @@ public class Emergentes extends JFrame{
         lienzoEmergente.setVisible(true);
         ventanaEmergente.add(lienzoEmergente,0);
         
-        fondoEmergente = new  JLabel(new ImageIcon("user.png"));
+        fondoEmergente = new  JLabel(user);
         fondoEmergente.setSize(128, 128);
         fondoEmergente.setVisible(true);
         fondoEmergente.setLocation(0,30);

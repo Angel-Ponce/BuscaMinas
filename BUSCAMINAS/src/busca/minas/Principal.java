@@ -13,11 +13,9 @@ public class Principal {
      * @param args 
      */
     public static void main(String[] args) {
-        
+        System.out.println("Game Iniciated");
         iniciarjuego = new Menu();
         iniciarjuego.iniciar();
     }
   
     }
-
-    

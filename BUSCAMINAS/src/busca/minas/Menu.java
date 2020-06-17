@@ -34,6 +34,8 @@ public class Menu {
     JPanel panelm;
     JLabel fondom;
 
+    final private ImageIcon buscaminas = new ImageIcon(getClass().getResource("/resources/Buscaminas.png"));
+    final private ImageIcon iconV = new ImageIcon(getClass().getResource("/resources/icon.png"));
     /***
      * Metodo iniciar: aquí es donde se le dio la estructura a la ventana y se coloco en el centro el boton de inicio.
      */
@@ -47,6 +49,7 @@ public class Menu {
        ventana.setResizable(false);
        ventana.setVisible(true);
        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       ventana.setIconImage(iconV.getImage());
        
        panel = new JPanel();
        panel.setLayout(null);
@@ -55,7 +58,7 @@ public class Menu {
        
        ventana.add(panel);
        
-       fondo = new JLabel(new ImageIcon("Buscaminas.png"));
+       fondo = new JLabel(buscaminas);
        //fondo.setBounds(0, 0, ventana.getWidth(), ventana.getHeight());
        fondo.setSize(558,558);
        fondo.setOpaque(true);

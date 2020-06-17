@@ -48,6 +48,10 @@ public class Record {
     ArrayList<String> jugadoresMedioSort   = new ArrayList();
     ArrayList<String> jugadoresDementeSort = new ArrayList();
     
+    final private ImageIcon dificultad = new ImageIcon(getClass().getResource("/resources/Dificultad.png"));
+    final private ImageIcon fWiners = new ImageIcon(getClass().getResource("/resources/FondoWiners.png"));
+    final private ImageIcon iconV = new ImageIcon(getClass().getResource("/resources/icon.png"));
+    
     public static int parametro;
     /***
      *Metodos records: Aqui se genera la ventana del record y los botones de las diferentes dificultades.
@@ -60,6 +64,7 @@ public class Record {
        ventanaRecords.setResizable(false);
        ventanaRecords.setVisible(true);
        ventanaRecords.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       ventanaRecords.setIconImage(iconV.getImage());
        
        panelRecord = new JPanel();
        panelRecord.setLayout(null);
@@ -67,7 +72,7 @@ public class Record {
        panelRecord.setVisible(true);
        ventanaRecords.add(panelRecord);
        
-       fondoRecord = new JLabel(new ImageIcon("Dificultad.png"));
+       fondoRecord = new JLabel(dificultad);
        fondoRecord.setSize(558,558);
        fondoRecord.setOpaque(true);
        fondoRecord.setVisible(true);
@@ -136,7 +141,7 @@ public class Record {
            * Este parametro es el que indica cuando se a clicado sobre el boton.
            */
            public void mousePressed(MouseEvent e){
-               fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
+              fondoRecord.setIcon(fWiners);
               parametro = 0; 
               listado(parametro);
                for(JButton botones: botonesLista){
@@ -163,7 +168,7 @@ public class Record {
            * Este parametro es el que indica cuando se a clicado sobre el boton.
            */
            public void mousePressed(MouseEvent e){
-               fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
+               fondoRecord.setIcon(fWiners);
                parametro = 1;
                listado(parametro);
                for(JButton botones: botonesLista){
@@ -190,7 +195,7 @@ public class Record {
            * Este parametro es el que indica cuando se a clicado sobre el boton.
            */
            public void mousePressed(MouseEvent e){
-               fondoRecord.setIcon(new ImageIcon("FondoWiners.png"));
+               fondoRecord.setIcon(fWiners);
                parametro =2;
                listado(parametro);
                for(JButton botones: botonesLista){
