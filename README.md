@@ -23,5 +23,7 @@ Guarda el record de los mejores jugadores por modalidad.
 $ git clone https://github.com/Angel-Ponce/BuscaMinas.git
 ```
 #Autores
+
 [Angel Ponce](https://github.com/Angel-Ponce)
+
 [Sergio Morán](https://github.com/Fernando1221)
