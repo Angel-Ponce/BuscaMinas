@@ -1,1 +1,13 @@
  , , 
+a,FÁCIL,0
+a,FÁCIL,104
+6,DEMENTE,4
+4,FÁCIL,369
+Karla,FÁCIL,383
+aaa,DEMENTE,0
+karla,FÁCIL,394
+Angel,DEMENTE,10
+Angel,FÁCIL,0
+Angel,FÁCIL,432
+Angel,FÁCIL,432
+Angel,FÁCIL,432
